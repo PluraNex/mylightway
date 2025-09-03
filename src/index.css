@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 25% 8%;
+    --foreground: 220 15% 95%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 220 15% 95%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 220 15% 95%;
+
+    --primary: 212 90% 65%;
+    --primary-foreground: 220 25% 8%;
+    --primary-light: 212 85% 75%;
+    --primary-glow: 212 95% 85%;
+
+    --secondary: 280 45% 65%;
+    --secondary-foreground: 220 25% 8%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 45 95% 70%;
+    --accent-foreground: 45 30% 15%;
+
+    --success: 142 76% 50%;
+    --success-foreground: 220 25% 8%;
+    --success-light: 142 70% 65%;
+
+    --warning: 35 91% 65%;
+    --warning-foreground: 35 30% 15%;
+
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 220 25% 8%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 212 90% 65%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(212 90% 65%), hsl(280 45% 65%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 95% 70%), hsl(35 91% 65%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 50%), hsl(142 70% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(212 80% 25%) 0%, hsl(280 40% 25%) 50%, hsl(45 60% 25%) 100%);
+    
+    /* Dark shadows */
+    --shadow-soft: 0 4px 24px hsl(220 25% 5% / 0.3);
+    --shadow-card: 0 8px 32px hsl(220 25% 5% / 0.4);
+    --shadow-badge: 0 4px 16px hsl(45 95% 70% / 0.3);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Font size utilities */
+  .text-sm {
+    --font-size-base: 14px;
+  }
+
+  .text-base {
+    --font-size-base: 16px;
+  }
+
+  .text-lg {
+    --font-size-base: 18px;
+  }
+
+  /* Reduce motion for accessibility */
+  .reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Dynamic font sizing */
+  html {
+    font-size: var(--font-size-base, 16px);
+  }
+
+  /* Theme transition animations */
+  html.light,
+  html.dark {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Enhanced focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .card {
+      @apply border-2;
+    }
+    
+    .button {
+      @apply border-2 border-foreground;
+    }
+  }
+
+  /* Dark mode specific adjustments */
+  .dark {
+    color-scheme: dark;
+    
+    /* Enhanced shadows for dark mode */
+    --shadow-soft: 0 4px 24px hsl(220 25% 5% / 0.4);
+    --shadow-card: 0 8px 32px hsl(220 25% 5% / 0.5);
+    --shadow-badge: 0 4px 16px hsl(45 95% 70% / 0.4);
+
+    /* Improved gradients for dark mode */
+    --gradient-primary: linear-gradient(135deg, hsl(212 95% 70%), hsl(280 50% 70%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 100% 75%), hsl(35 95% 70%));
+    --gradient-success: linear-gradient(135deg, hsl(142 80% 55%), hsl(142 75% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(212 85% 30%) 0%, hsl(280 45% 30%) 50%, hsl(45 65% 30%) 100%);
+  }
+
+  /* Light mode specific adjustments */
+  .light {
+    color-scheme: light;
+    
+    /* Light mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(212 85% 60%), hsl(280 40% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 90% 65%), hsl(35 85% 60%));
+    --gradient-success: linear-gradient(135deg, hsl(142 70% 45%), hsl(142 65% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(212 75% 20%) 0%, hsl(280 35% 20%) 50%, hsl(45 55% 20%) 100%);
+    
+    /* Light mode shadows */
+    --shadow-soft: 0 4px 24px hsl(220 15% 85% / 0.3);
+    --shadow-card: 0 8px 32px hsl(220 15% 85% / 0.4);
+    --shadow-badge: 0 4px 16px hsl(45 85% 60% / 0.3);
+  }
+
+  /* Print styles */
+  @media print {
+    * {
+      background: white !important;
+      color: black !important;
+      box-shadow: none !important;
+    }
+  }
+}

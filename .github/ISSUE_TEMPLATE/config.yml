@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/owner/mylightway/discussions
+    about: Perguntas gerais, ideias e discussões sobre o projeto
+  - name: 💡 Ideas & Feedback  
+    url: https://github.com/owner/mylightway/discussions/categories/ideas
+    about: Compartilhe suas ideias e feedback sobre o MyLightWay
+  - name: 🆘 Support
+    url: https://github.com/owner/mylightway/discussions/categories/q-a
+    about: Precisa de ajuda? Faça uma pergunta na seção Q&A
