@@ -40,7 +40,11 @@ describe('ErrorBoundary', () => {
     );
 
     expect(screen.getByText('Oops! Algo deu errado')).toBeInTheDocument();
-    expect(screen.getByText('Encontramos um erro inesperado. Nossa equipe foi notificada.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Encontramos um erro inesperado. Nossa equipe foi notificada.'
+      )
+    ).toBeInTheDocument();
   });
 
   it('should display custom fallback when provided', () => {
@@ -94,7 +98,9 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    expect(screen.getByText('Detalhes do Erro (desenvolvimento)')).toBeInTheDocument();
+    expect(
+      screen.getByText('Detalhes do Erro (desenvolvimento)')
+    ).toBeInTheDocument();
 
     process.env.NODE_ENV = originalEnv;
   });
@@ -109,16 +115,18 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    expect(screen.queryByText('Detalhes do Erro (desenvolvimento)')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Detalhes do Erro (desenvolvimento)')
+    ).not.toBeInTheDocument();
 
     process.env.NODE_ENV = originalEnv;
   });
 });
 
 describe('withErrorBoundary HOC', () => {
-  it('should wrap component with error boundary', () => {
-    const { withErrorBoundary } = require('@/components/ErrorBoundary');
-    
+  it('should wrap component with error boundary', async () => {
+    const { withErrorBoundary } = await import('@/components/ErrorBoundary');
+
     const TestComponent = () => <div>Test Component</div>;
     const WrappedComponent = withErrorBoundary(TestComponent);
 
@@ -127,9 +135,9 @@ describe('withErrorBoundary HOC', () => {
     expect(screen.getByText('Test Component')).toBeInTheDocument();
   });
 
-  it('should catch errors in wrapped component', () => {
-    const { withErrorBoundary } = require('@/components/ErrorBoundary');
-    
+  it('should catch errors in wrapped component', async () => {
+    const { withErrorBoundary } = await import('@/components/ErrorBoundary');
+
     const ErrorComponent = () => {
       throw new Error('Wrapped component error');
     };
