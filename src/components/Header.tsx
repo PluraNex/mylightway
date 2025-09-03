@@ -4,7 +4,6 @@ import {
   BookOpen, 
   Home, 
   Trophy, 
-  User, 
   Heart, 
   Menu,
   Bell,

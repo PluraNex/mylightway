@@ -46,11 +46,10 @@ export class ErrorBoundary extends Component<Props, State> {
 
   private logErrorToService = (error: Error, errorInfo: ErrorInfo) => {
     // In production, you would send this to your error reporting service
-    console.group('🚨 Error Boundary Caught Error');
+    console.warn('🚨 Error Boundary Caught Error');
     console.error('Error:', error);
     console.error('Error Info:', errorInfo);
     console.error('Stack:', error.stack);
-    console.groupEnd();
 
     // Example: Send to external service
     // ErrorReportingService.captureException(error, {

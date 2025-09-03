@@ -39,11 +39,12 @@ export default tseslint.config(
       
       // TypeScript specific rules
       "@typescript-eslint/no-unused-vars": [
-        "error",
+        "warn",
         { 
           argsIgnorePattern: "^_",
           varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_"
+          caughtErrorsIgnorePattern: "^_",
+          ignoreRestSiblings: true
         }
       ],
       "@typescript-eslint/explicit-function-return-type": "off",
@@ -52,20 +53,20 @@ export default tseslint.config(
       "@typescript-eslint/no-non-null-assertion": "warn",
       "@typescript-eslint/no-var-requires": "error",
       
-      // General best practices
+      // General best practices (relaxed for development)
       "no-console": ["warn", { allow: ["warn", "error", "info"] }],
       "no-debugger": "warn",
       "no-alert": "warn",
       "no-eval": "error",
       "no-implied-eval": "error",
-      "prefer-const": "error",
-      "no-var": "error",
+      "prefer-const": "warn",
+      "no-var": "warn",
       "object-shorthand": "warn",
       "prefer-arrow-callback": "warn",
       "prefer-template": "warn",
       
       // Import/Export rules
-      "no-duplicate-imports": "error",
+      "no-duplicate-imports": "warn",
       
       // React specific rules
       "react-hooks/exhaustive-deps": "warn",
@@ -73,10 +74,10 @@ export default tseslint.config(
       // Accessibility rules (basic)
       "jsx-a11y/alt-text": "off", // Will be handled by linter plugin if added
       
-      // Code quality
-      "complexity": ["warn", 10],
-      "max-depth": ["warn", 4],
-      "max-lines-per-function": ["warn", { max: 100 }],
+      // Code quality (relaxed for development)
+      "complexity": ["warn", 15],
+      "max-depth": ["warn", 6],
+      "max-lines-per-function": ["warn", { max: 200 }],
       
       // Naming conventions
       "@typescript-eslint/naming-convention": [

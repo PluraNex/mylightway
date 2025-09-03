@@ -1,5 +1,6 @@
 import { createLazyComponent } from '@/utils/lazyLoader';
 import { LoadingFallback, DashboardSkeleton } from '@/components/LoadingFallback';
+import React from 'react';
 
 // Lazy load all page components with appropriate fallbacks
 export const LazyIndex = createLazyComponent(

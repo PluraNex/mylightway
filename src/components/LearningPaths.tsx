@@ -12,7 +12,6 @@ import {
   Eye, 
   Mountain, 
   Brain, 
-  Target, 
   Music,
   Hand,
   Star
