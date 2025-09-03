@@ -1,17 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api/client';
 import { queryKeys, apiEndpoints } from '@/lib/api/config';
-import type { 
-  LoginRequest, 
-  LoginResponse, 
-  RegisterRequest, 
+import type {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
   UserProfile,
-  ApiSuccessResponse 
+  ApiSuccessResponse,
 } from '@/types/api';
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (data: LoginRequest): Promise<LoginResponse> => {
       const response = await apiClient.post<ApiSuccessResponse<LoginResponse>>(
@@ -20,7 +20,7 @@ export const useLogin = () => {
       );
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       apiClient.setAuthToken(data.token);
       queryClient.setQueryData(queryKeys.auth.profile(), data.user);
       localStorage.setItem('auth_token', data.token);
@@ -43,7 +43,7 @@ export const useRegister = () => {
       );
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       apiClient.setAuthToken(data.token);
       localStorage.setItem('auth_token', data.token);
       localStorage.setItem('refresh_token', data.refreshToken);
@@ -53,7 +53,7 @@ export const useRegister = () => {
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (): Promise<void> => {
       try {
@@ -93,21 +93,21 @@ export const useProfile = () => {
 
 export const useRefreshToken = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (): Promise<LoginResponse> => {
       const refreshToken = localStorage.getItem('refresh_token');
       if (!refreshToken) {
         throw new Error('No refresh token available');
       }
-      
+
       const response = await apiClient.post<ApiSuccessResponse<LoginResponse>>(
         apiEndpoints.auth.refresh,
         { refreshToken }
       );
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       apiClient.setAuthToken(data.token);
       queryClient.setQueryData(queryKeys.auth.profile(), data.user);
       localStorage.setItem('auth_token', data.token);
@@ -135,7 +135,10 @@ export const useForgotPassword = () => {
 
 export const useResetPassword = () => {
   return useMutation({
-    mutationFn: async (data: { token: string; password: string }): Promise<void> => {
+    mutationFn: async (data: {
+      token: string;
+      password: string;
+    }): Promise<void> => {
       await apiClient.post<ApiSuccessResponse<void>>(
         apiEndpoints.auth.resetPassword,
         data

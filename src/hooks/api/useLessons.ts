@@ -1,11 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api/client';
 import { queryKeys, apiEndpoints } from '@/lib/api/config';
-import type { 
-  Lesson, 
+import type {
+  Lesson,
   UserProgress,
   ProgressAttempt,
-  ApiSuccessResponse 
+  ApiSuccessResponse,
 } from '@/types/api';
 
 export const useLesson = (id: string, enabled = true) => {
@@ -63,24 +63,26 @@ interface StartLessonData {
 
 export const useStartLesson = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (data: StartLessonData): Promise<ProgressAttempt> => {
-      const response = await apiClient.post<ApiSuccessResponse<ProgressAttempt>>(
-        apiEndpoints.lessons.progress(data.lessonId),
-        { action: 'start', pathId: data.pathId }
-      );
+      const response = await apiClient.post<
+        ApiSuccessResponse<ProgressAttempt>
+      >(apiEndpoints.lessons.progress(data.lessonId), {
+        action: 'start',
+        pathId: data.pathId,
+      });
       return response.data;
     },
     onSuccess: (data, variables) => {
       // Invalidate lesson progress
-      queryClient.invalidateQueries({ 
-        queryKey: queryKeys.lessons.progress(variables.lessonId) 
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.lessons.progress(variables.lessonId),
       });
       // Invalidate path progress if provided
       if (variables.pathId) {
-        queryClient.invalidateQueries({ 
-          queryKey: queryKeys.learningPaths.progress(variables.pathId) 
+        queryClient.invalidateQueries({
+          queryKey: queryKeys.learningPaths.progress(variables.pathId),
         });
       }
       // Invalidate user progress
@@ -99,7 +101,7 @@ interface UpdateProgressData {
 
 export const useUpdateLessonProgress = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (data: UpdateProgressData): Promise<UserProgress> => {
       const response = await apiClient.patch<ApiSuccessResponse<UserProgress>>(
@@ -121,12 +123,14 @@ export const useUpdateLessonProgress = () => {
       );
       // Invalidate path progress if provided
       if (variables.pathId) {
-        queryClient.invalidateQueries({ 
-          queryKey: queryKeys.learningPaths.progress(variables.pathId) 
+        queryClient.invalidateQueries({
+          queryKey: queryKeys.learningPaths.progress(variables.pathId),
         });
       }
       // Invalidate user stats for progress updates
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.stats(data.userId) });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.users.stats(data.userId),
+      });
     },
   });
 };
@@ -141,7 +145,7 @@ interface CompleteLessonData {
 
 export const useCompleteLesson = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (data: CompleteLessonData): Promise<UserProgress> => {
       const response = await apiClient.post<ApiSuccessResponse<UserProgress>>(
@@ -163,13 +167,17 @@ export const useCompleteLesson = () => {
       );
       // Invalidate related queries
       if (variables.pathId) {
-        queryClient.invalidateQueries({ 
-          queryKey: queryKeys.learningPaths.progress(variables.pathId) 
+        queryClient.invalidateQueries({
+          queryKey: queryKeys.learningPaths.progress(variables.pathId),
         });
       }
       queryClient.invalidateQueries({ queryKey: queryKeys.progress.all() });
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.stats(data.userId) });
-      queryClient.invalidateQueries({ queryKey: queryKeys.achievements.user() });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.users.stats(data.userId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.achievements.user(),
+      });
     },
   });
 };

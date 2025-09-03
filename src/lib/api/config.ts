@@ -14,21 +14,26 @@ export const queryKeys = {
   },
   learningPaths: {
     all: () => ['learning-paths'] as const,
-    list: (params?: Record<string, any>) => ['learning-paths', 'list', params] as const,
+    list: (params?: Record<string, any>) =>
+      ['learning-paths', 'list', params] as const,
     detail: (id: string) => ['learning-paths', 'detail', id] as const,
     lessons: (pathId: string) => ['learning-paths', pathId, 'lessons'] as const,
-    progress: (pathId: string, userId?: string) => ['learning-paths', pathId, 'progress', userId] as const,
+    progress: (pathId: string, userId?: string) =>
+      ['learning-paths', pathId, 'progress', userId] as const,
   },
   lessons: {
     all: () => ['lessons'] as const,
     detail: (id: string) => ['lessons', 'detail', id] as const,
     content: (id: string) => ['lessons', 'content', id] as const,
-    progress: (lessonId: string, userId?: string) => ['lessons', lessonId, 'progress', userId] as const,
+    progress: (lessonId: string, userId?: string) =>
+      ['lessons', lessonId, 'progress', userId] as const,
   },
   progress: {
     all: (userId?: string) => ['progress', userId] as const,
-    byPath: (pathId: string, userId?: string) => ['progress', 'path', pathId, userId] as const,
-    byLesson: (lessonId: string, userId?: string) => ['progress', 'lesson', lessonId, userId] as const,
+    byPath: (pathId: string, userId?: string) =>
+      ['progress', 'path', pathId, userId] as const,
+    byLesson: (lessonId: string, userId?: string) =>
+      ['progress', 'lesson', lessonId, userId] as const,
   },
   achievements: {
     all: () => ['achievements'] as const,
@@ -44,7 +49,8 @@ export const queryKeys = {
   parents: {
     dashboard: (userId?: string) => ['parents', 'dashboard', userId] as const,
     children: (userId?: string) => ['parents', 'children', userId] as const,
-    childProgress: (childId: string, parentId?: string) => ['parents', 'child-progress', childId, parentId] as const,
+    childProgress: (childId: string, parentId?: string) =>
+      ['parents', 'child-progress', childId, parentId] as const,
   },
   categories: {
     all: () => ['categories'] as const,

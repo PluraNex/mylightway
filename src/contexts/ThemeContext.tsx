@@ -29,14 +29,19 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const preferences = usePreferences();
   const { setTheme, setFontSize } = useAppStore();
-  
-  const [actualTheme, setActualTheme] = React.useState<'light' | 'dark'>('light');
+
+  const [actualTheme, setActualTheme] = React.useState<'light' | 'dark'>(
+    'light'
+  );
 
   // Resolve system theme
   useEffect(() => {
     const updateSystemTheme = () => {
       if (preferences.theme === 'system') {
-        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+          .matches
+          ? 'dark'
+          : 'light';
         setActualTheme(systemTheme);
       } else {
         setActualTheme(preferences.theme as 'light' | 'dark');
@@ -54,13 +59,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // Apply theme to document
   useEffect(() => {
     const root = window.document.documentElement;
-    
+
     // Remove previous theme classes
     root.classList.remove('light', 'dark');
-    
+
     // Add current theme class
     root.classList.add(actualTheme);
-    
+
     // Update meta theme-color for mobile browsers
     const themeColorMeta = document.querySelector('meta[name="theme-color"]');
     if (themeColorMeta) {
@@ -72,34 +77,36 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // Apply font size to document
   useEffect(() => {
     const root = window.document.documentElement;
-    
+
     // Remove previous font size classes
     root.classList.remove('text-sm', 'text-base', 'text-lg');
-    
+
     // Add current font size class
     const fontSizeClasses = {
       small: 'text-sm',
-      medium: 'text-base', 
-      large: 'text-lg'
+      medium: 'text-base',
+      large: 'text-lg',
     };
-    
+
     root.classList.add(fontSizeClasses[preferences.fontSize]);
-    
+
     // Update CSS custom property for more granular control
     const fontSizes = {
       small: '14px',
       medium: '16px',
-      large: '18px'
+      large: '18px',
     };
-    
+
     root.style.setProperty('--font-size-base', fontSizes[preferences.fontSize]);
   }, [preferences.fontSize]);
 
   // Accessibility: respect user's motion preferences
   useEffect(() => {
     const root = window.document.documentElement;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
     if (prefersReducedMotion) {
       root.classList.add('reduce-motion');
     } else {
@@ -116,16 +123,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
 // Higher-order component for theme-aware components
-export function withTheme<P extends object>(
-  Component: React.ComponentType<P>
-) {
+export function withTheme<P extends object>(Component: React.ComponentType<P>) {
   const ThemedComponent = (props: P) => (
     <ThemeProvider>
       <Component {...props} />
@@ -147,9 +150,12 @@ export const useThemeAwareStyles = () => {
 
   const getFontSizeValue = <T,>(small: T, medium: T, large: T): T => {
     switch (fontSize) {
-      case 'small': return small;
-      case 'large': return large;
-      default: return medium;
+      case 'small':
+        return small;
+      case 'large':
+        return large;
+      default:
+        return medium;
     }
   };
 

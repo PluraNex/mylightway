@@ -2,7 +2,13 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertCircle, RefreshCcw, Home } from 'lucide-react';
 import { Button } from './ui/button';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from './ui/card';
 
 interface Props {
   children: ReactNode;
@@ -39,7 +45,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
     // Log error to external service
     this.logErrorToService(error, errorInfo);
-    
+
     // Call optional error handler
     this.props.onError?.(error, errorInfo);
   }
@@ -79,11 +85,11 @@ export class ErrorBoundary extends Component<Props, State> {
 
       // Default fallback UI
       return (
-        <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="flex min-h-screen items-center justify-center bg-background p-4">
           <Card className="w-full max-w-md">
             <CardHeader>
               <div className="flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-destructive" />
+                <AlertCircle className="h-5 w-5 text-destructive" />
                 <CardTitle>Oops! Algo deu errado</CardTitle>
               </div>
               <CardDescription>
@@ -100,12 +106,20 @@ export class ErrorBoundary extends Component<Props, State> {
               </Alert>
 
               <div className="flex flex-col gap-2">
-                <Button onClick={this.handleReset} variant="default" className="w-full">
-                  <RefreshCcw className="w-4 h-4 mr-2" />
+                <Button
+                  onClick={this.handleReset}
+                  variant="default"
+                  className="w-full"
+                >
+                  <RefreshCcw className="mr-2 h-4 w-4" />
                   Tentar Novamente
                 </Button>
-                <Button onClick={this.handleGoHome} variant="outline" className="w-full">
-                  <Home className="w-4 h-4 mr-2" />
+                <Button
+                  onClick={this.handleGoHome}
+                  variant="outline"
+                  className="w-full"
+                >
+                  <Home className="mr-2 h-4 w-4" />
                   Voltar ao Início
                 </Button>
               </div>
@@ -115,7 +129,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   <summary className="cursor-pointer text-sm font-medium">
                     Detalhes do Erro (desenvolvimento)
                   </summary>
-                  <pre className="mt-2 text-xs bg-muted p-2 rounded overflow-auto">
+                  <pre className="mt-2 overflow-auto rounded bg-muted p-2 text-xs">
                     {this.state.error?.stack}
                   </pre>
                 </details>

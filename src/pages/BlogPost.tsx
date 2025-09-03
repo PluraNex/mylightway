@@ -1,15 +1,21 @@
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import { 
-  ArrowLeft, 
-  Calendar, 
-  Clock, 
-  User, 
+import { useState } from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  User,
   Heart,
   MessageSquare,
   Share2,
@@ -26,47 +32,51 @@ import {
   BookOpen,
   Star,
   Eye,
-  Tag
-} from "lucide-react";
-import { Link, useParams } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
+  Tag,
+} from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
 
 const BlogPost = () => {
   const { postId } = useParams();
   const { toast } = useToast();
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([
     {
       id: 1,
-      author: "Maria Santos",
-      content: "Excelente artigo! Tenho aplicado essas dicas com meus filhos e vejo uma diferença significativa no comportamento deles.",
-      date: "2024-01-16",
+      author: 'Maria Santos',
+      content:
+        'Excelente artigo! Tenho aplicado essas dicas com meus filhos e vejo uma diferença significativa no comportamento deles.',
+      date: '2024-01-16',
       likes: 12,
-      replies: 2
+      replies: 2,
     },
     {
       id: 2,
-      author: "João Silva",
-      content: "Muito útil! Como pastor, posso confirmar que essas estratégias realmente funcionam quando aplicadas com consistência e amor.",
-      date: "2024-01-15",
+      author: 'João Silva',
+      content:
+        'Muito útil! Como pastor, posso confirmar que essas estratégias realmente funcionam quando aplicadas com consistência e amor.',
+      date: '2024-01-15',
       likes: 8,
-      replies: 1
-    }
+      replies: 1,
+    },
   ]);
 
   // Mock data do artigo (em produção viria de uma API)
   const article = {
     id: 1,
-    title: "Como Ensinar Valores Cristãos no Dia a Dia",
-    excerpt: "Descubra estratégias práticas para incorporar valores cristãos na rotina familiar, criando momentos de aprendizado natural e significativo.",
-    author: "Pastora Maria Silva",
-    authorBio: "Pastora há 15 anos, mãe de 3 filhos e especialista em educação cristã infantil. Formada em Teologia e Pedagogia.",
-    category: "Orientação aos Pais",
-    tags: ["valores", "família", "educação", "rotina"],
-    publishedDate: "2024-01-15",
-    readTime: "8 min",
+    title: 'Como Ensinar Valores Cristãos no Dia a Dia',
+    excerpt:
+      'Descubra estratégias práticas para incorporar valores cristãos na rotina familiar, criando momentos de aprendizado natural e significativo.',
+    author: 'Pastora Maria Silva',
+    authorBio:
+      'Pastora há 15 anos, mãe de 3 filhos e especialista em educação cristã infantil. Formada em Teologia e Pedagogia.',
+    category: 'Orientação aos Pais',
+    tags: ['valores', 'família', 'educação', 'rotina'],
+    publishedDate: '2024-01-15',
+    readTime: '8 min',
     likes: 156,
     comments: 23,
     views: 1234,
@@ -138,49 +148,53 @@ const BlogPost = () => {
       <p>Lembre-se: a educação cristã é um processo contínuo que acontece em cada interação. Não precisa ser perfeito - precisa ser autêntico. As crianças precisam ver que a fé é algo vivo e relevante para toda situação da vida.</p>
 
       <p>Que Deus abençoe sua jornada como educador dos pequenos que Ele confiou aos seus cuidados!</p>
-    `
+    `,
   };
 
   const relatedPosts = [
     {
       id: 2,
-      title: "A Importância da Oração em Família",
-      category: "Vida Espiritual",
-      readTime: "6 min"
+      title: 'A Importância da Oração em Família',
+      category: 'Vida Espiritual',
+      readTime: '6 min',
     },
     {
       id: 4,
-      title: "Lidando com Perguntas Difíceis das Crianças sobre Fé",
-      category: "Orientação aos Pais", 
-      readTime: "12 min"
+      title: 'Lidando com Perguntas Difíceis das Crianças sobre Fé',
+      category: 'Orientação aos Pais',
+      readTime: '12 min',
     },
     {
       id: 5,
-      title: "Criando Tradições Familiares Significativas",
-      category: "Vida Familiar",
-      readTime: "7 min"
-    }
+      title: 'Criando Tradições Familiares Significativas',
+      category: 'Vida Familiar',
+      readTime: '7 min',
+    },
   ];
 
   const handleLike = () => {
     setLiked(!liked);
     toast({
-      title: liked ? "Curtida removida" : "Artigo curtido!",
-      description: liked ? "Você removeu sua curtida." : "Obrigado pelo seu feedback!",
+      title: liked ? 'Curtida removida' : 'Artigo curtido!',
+      description: liked
+        ? 'Você removeu sua curtida.'
+        : 'Obrigado pelo seu feedback!',
     });
   };
 
   const handleSave = () => {
     setSaved(!saved);
     toast({
-      title: saved ? "Removido dos favoritos" : "Salvo nos favoritos!",
-      description: saved ? "Artigo removido da sua lista." : "Você pode encontrar este artigo na sua lista de favoritos.",
+      title: saved ? 'Removido dos favoritos' : 'Salvo nos favoritos!',
+      description: saved
+        ? 'Artigo removido da sua lista.'
+        : 'Você pode encontrar este artigo na sua lista de favoritos.',
     });
   };
 
   const handleShare = (platform: string) => {
     toast({
-      title: "Link copiado!",
+      title: 'Link copiado!',
       description: `Artigo compartilhado via ${platform}.`,
     });
   };
@@ -189,42 +203,49 @@ const BlogPost = () => {
     if (newComment.trim()) {
       const comment = {
         id: comments.length + 1,
-        author: "Você",
+        author: 'Você',
         content: newComment,
         date: new Date().toISOString().split('T')[0],
         likes: 0,
-        replies: 0
+        replies: 0,
       };
       setComments([...comments, comment]);
-      setNewComment("");
+      setNewComment('');
       toast({
-        title: "Comentário publicado!",
-        description: "Seu comentário foi adicionado com sucesso.",
+        title: 'Comentário publicado!',
+        description: 'Seu comentário foi adicionado com sucesso.',
       });
     }
   };
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto max-w-4xl px-4 py-8">
         {/* Breadcrumb */}
         <div className="mb-6">
           <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Link to="/pais" className="hover:text-foreground">Área dos Pais</Link>
+            <Link to="/pais" className="hover:text-foreground">
+              Área dos Pais
+            </Link>
             <span>/</span>
-            <Link to="/blog" className="hover:text-foreground">Blog</Link>
+            <Link to="/blog" className="hover:text-foreground">
+              Blog
+            </Link>
             <span>/</span>
             <span className="text-foreground">{article.category}</span>
           </nav>
         </div>
 
-        <div className="grid lg:grid-cols-4 gap-8">
+        <div className="grid gap-8 lg:grid-cols-4">
           {/* Conteúdo Principal */}
           <div className="lg:col-span-3">
             {/* Header do Artigo */}
             <div className="mb-8">
-              <Link to="/blog" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+              <Link
+                to="/blog"
+                className="mb-6 inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
                 Voltar ao Blog
               </Link>
 
@@ -232,31 +253,35 @@ const BlogPost = () => {
                 <Badge variant="secondary" className="mb-3">
                   {article.category}
                 </Badge>
-                <h1 className="text-4xl font-bold mb-4 leading-tight">
+                <h1 className="mb-4 text-4xl font-bold leading-tight">
                   {article.title}
                 </h1>
-                <p className="text-xl text-muted-foreground mb-6">
+                <p className="mb-6 text-xl text-muted-foreground">
                   {article.excerpt}
                 </p>
               </div>
 
               {/* Meta informações */}
-              <div className="flex items-center justify-between mb-6 p-4 bg-muted/30 rounded-lg">
+              <div className="mb-6 flex items-center justify-between rounded-lg bg-muted/30 p-4">
                 <div className="flex items-center space-x-6 text-sm">
                   <div className="flex items-center space-x-2">
-                    <User className="w-4 h-4" />
+                    <User className="h-4 w-4" />
                     <span className="font-medium">{article.author}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>{new Date(article.publishedDate).toLocaleDateString('pt-BR')}</span>
+                    <Calendar className="h-4 w-4" />
+                    <span>
+                      {new Date(article.publishedDate).toLocaleDateString(
+                        'pt-BR'
+                      )}
+                    </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Clock className="w-4 h-4" />
+                    <Clock className="h-4 w-4" />
                     <span>{article.readTime}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Eye className="w-4 h-4" />
+                    <Eye className="h-4 w-4" />
                     <span>{article.views} visualizações</span>
                   </div>
                 </div>
@@ -266,22 +291,26 @@ const BlogPost = () => {
                     variant="ghost"
                     size="sm"
                     onClick={handleLike}
-                    className={liked ? "text-red-500" : ""}
+                    className={liked ? 'text-red-500' : ''}
                   >
-                    <Heart className={`w-4 h-4 mr-1 ${liked ? "fill-current" : ""}`} />
+                    <Heart
+                      className={`mr-1 h-4 w-4 ${liked ? 'fill-current' : ''}`}
+                    />
                     {article.likes + (liked ? 1 : 0)}
                   </Button>
                   <Button variant="ghost" size="sm">
-                    <MessageSquare className="w-4 h-4 mr-1" />
+                    <MessageSquare className="mr-1 h-4 w-4" />
                     {comments.length}
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={handleSave}
-                    className={saved ? "text-primary" : ""}
+                    className={saved ? 'text-primary' : ''}
                   >
-                    <Bookmark className={`w-4 h-4 ${saved ? "fill-current" : ""}`} />
+                    <Bookmark
+                      className={`h-4 w-4 ${saved ? 'fill-current' : ''}`}
+                    />
                   </Button>
                 </div>
               </div>
@@ -290,13 +319,15 @@ const BlogPost = () => {
             {/* Conteúdo do Artigo */}
             <Card className="mb-8">
               <CardContent className="p-8">
-                <article 
-                  className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-ul:text-muted-foreground prose-li:text-muted-foreground"
+                <article
+                  className="prose prose-lg prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-ul:text-muted-foreground prose-li:text-muted-foreground max-w-none"
                   dangerouslySetInnerHTML={{ __html: article.content }}
-                  style={{
-                    "--prose-body": "hsl(var(--muted-foreground))",
-                    "--prose-headings": "hsl(var(--foreground))",
-                  } as any}
+                  style={
+                    {
+                      '--prose-body': 'hsl(var(--muted-foreground))',
+                      '--prose-headings': 'hsl(var(--foreground))',
+                    } as any
+                  }
                 />
 
                 {/* Estilização para boxes especiais */}
@@ -340,16 +371,16 @@ const BlogPost = () => {
 
             {/* Tags do Artigo */}
             <div className="mb-8">
-              <h3 className="font-semibold mb-3 flex items-center">
-                <Tag className="w-4 h-4 mr-2" />
+              <h3 className="mb-3 flex items-center font-semibold">
+                <Tag className="mr-2 h-4 w-4" />
                 Tags do Artigo
               </h3>
               <div className="flex flex-wrap gap-2">
-                {article.tags.map((tag) => (
+                {article.tags.map(tag => (
                   <Link
                     key={tag}
                     to={`/blog?tag=${tag}`}
-                    className="px-3 py-1 bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground rounded-full text-sm transition-colors"
+                    className="rounded-full bg-muted/50 px-3 py-1 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                   >
                     #{tag}
                   </Link>
@@ -361,12 +392,14 @@ const BlogPost = () => {
             <Card className="mb-8">
               <CardContent className="p-6">
                 <div className="flex items-start space-x-4">
-                  <div className="w-16 h-16 bg-gradient-primary/10 rounded-full flex items-center justify-center">
-                    <User className="w-8 h-8 text-primary" />
+                  <div className="bg-gradient-primary/10 flex h-16 w-16 items-center justify-center rounded-full">
+                    <User className="h-8 w-8 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-1">{article.author}</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
+                    <h3 className="mb-1 text-lg font-semibold">
+                      {article.author}
+                    </h3>
+                    <p className="mb-3 text-sm text-muted-foreground">
                       {article.authorBio}
                     </p>
                     <div className="flex items-center space-x-2">
@@ -385,33 +418,33 @@ const BlogPost = () => {
             {/* Compartilhamento */}
             <Card className="mb-8">
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-4 flex items-center">
-                  <Share2 className="w-4 h-4 mr-2" />
+                <h3 className="mb-4 flex items-center font-semibold">
+                  <Share2 className="mr-2 h-4 w-4" />
                   Compartilhe este artigo
                 </h3>
                 <div className="flex items-center space-x-3">
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleShare("Facebook")}
+                    onClick={() => handleShare('Facebook')}
                   >
-                    <Facebook className="w-4 h-4 mr-2" />
+                    <Facebook className="mr-2 h-4 w-4" />
                     Facebook
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleShare("Twitter")}
+                    onClick={() => handleShare('Twitter')}
                   >
-                    <Twitter className="w-4 h-4 mr-2" />
+                    <Twitter className="mr-2 h-4 w-4" />
                     Twitter
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleShare("Link")}
+                    onClick={() => handleShare('Link')}
                   >
-                    <Copy className="w-4 h-4 mr-2" />
+                    <Copy className="mr-2 h-4 w-4" />
                     Copiar Link
                   </Button>
                 </div>
@@ -422,7 +455,7 @@ const BlogPost = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <MessageSquare className="w-5 h-5 mr-2" />
+                  <MessageSquare className="mr-2 h-5 w-5" />
                   Comentários ({comments.length})
                 </CardTitle>
                 <CardDescription>
@@ -436,12 +469,15 @@ const BlogPost = () => {
                   <Textarea
                     placeholder="Compartilhe sua experiência, dúvidas ou reflexões sobre este artigo..."
                     value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
+                    onChange={e => setNewComment(e.target.value)}
                     className="min-h-24"
                   />
                   <div className="flex justify-end">
-                    <Button onClick={handleComment} disabled={!newComment.trim()}>
-                      <Send className="w-4 h-4 mr-2" />
+                    <Button
+                      onClick={handleComment}
+                      disabled={!newComment.trim()}
+                    >
+                      <Send className="mr-2 h-4 w-4" />
                       Publicar Comentário
                     </Button>
                   </div>
@@ -451,31 +487,39 @@ const BlogPost = () => {
 
                 {/* Lista de comentários */}
                 <div className="space-y-4">
-                  {comments.map((comment) => (
-                    <div key={comment.id} className="p-4 bg-muted/30 rounded-lg">
-                      <div className="flex items-start justify-between mb-2">
+                  {comments.map(comment => (
+                    <div
+                      key={comment.id}
+                      className="rounded-lg bg-muted/30 p-4"
+                    >
+                      <div className="mb-2 flex items-start justify-between">
                         <div className="flex items-center space-x-2">
-                          <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                            <User className="w-4 h-4 text-primary" />
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                            <User className="h-4 w-4 text-primary" />
                           </div>
                           <div>
-                            <span className="font-medium text-sm">{comment.author}</span>
-                            <span className="text-xs text-muted-foreground ml-2">
-                              {new Date(comment.date).toLocaleDateString('pt-BR')}
+                            <span className="text-sm font-medium">
+                              {comment.author}
+                            </span>
+                            <span className="ml-2 text-xs text-muted-foreground">
+                              {new Date(comment.date).toLocaleDateString(
+                                'pt-BR'
+                              )}
                             </span>
                           </div>
                         </div>
                         <Button variant="ghost" size="sm">
-                          <ThumbsUp className="w-3 h-3 mr-1" />
+                          <ThumbsUp className="mr-1 h-3 w-3" />
                           {comment.likes}
                         </Button>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">
+                      <p className="mb-2 text-sm text-muted-foreground">
                         {comment.content}
                       </p>
                       {comment.replies > 0 && (
                         <Button variant="ghost" size="sm" className="text-xs">
-                          Ver {comment.replies} resposta{comment.replies > 1 ? 's' : ''}
+                          Ver {comment.replies} resposta
+                          {comment.replies > 1 ? 's' : ''}
                         </Button>
                       )}
                     </div>
@@ -491,25 +535,40 @@ const BlogPost = () => {
               {/* Índice do artigo */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg flex items-center">
-                    <BookOpen className="w-5 h-5 mr-2" />
+                  <CardTitle className="flex items-center text-lg">
+                    <BookOpen className="mr-2 h-5 w-5" />
                     Índice
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm space-y-2">
-                  <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+                <CardContent className="space-y-2 text-sm">
+                  <a
+                    href="#"
+                    className="block text-muted-foreground transition-colors hover:text-foreground"
+                  >
                     1. Momentos Simples em Oportunidades
                   </a>
-                  <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+                  <a
+                    href="#"
+                    className="block text-muted-foreground transition-colors hover:text-foreground"
+                  >
                     2. Histórias e Exemplos Bíblicos
                   </a>
-                  <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+                  <a
+                    href="#"
+                    className="block text-muted-foreground transition-colors hover:text-foreground"
+                  >
                     3. Rotinas de Gratidão
                   </a>
-                  <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+                  <a
+                    href="#"
+                    className="block text-muted-foreground transition-colors hover:text-foreground"
+                  >
                     4. Amor em Ação
                   </a>
-                  <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+                  <a
+                    href="#"
+                    className="block text-muted-foreground transition-colors hover:text-foreground"
+                  >
                     5. Ensino pelo Exemplo
                   </a>
                 </CardContent>
@@ -518,20 +577,20 @@ const BlogPost = () => {
               {/* Artigos Relacionados */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg flex items-center">
-                    <Star className="w-5 h-5 mr-2" />
+                  <CardTitle className="flex items-center text-lg">
+                    <Star className="mr-2 h-5 w-5" />
                     Artigos Relacionados
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {relatedPosts.map((post) => (
+                  {relatedPosts.map(post => (
                     <Link
                       key={post.id}
                       to={`/blog/${post.id}`}
-                      className="block group"
+                      className="group block"
                     >
                       <div className="space-y-2">
-                        <h4 className="text-sm font-medium group-hover:text-primary transition-colors line-clamp-2">
+                        <h4 className="line-clamp-2 text-sm font-medium transition-colors group-hover:text-primary">
                           {post.title}
                         </h4>
                         <div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -539,7 +598,7 @@ const BlogPost = () => {
                             {post.category}
                           </Badge>
                           <div className="flex items-center space-x-1">
-                            <Clock className="w-3 h-3" />
+                            <Clock className="h-3 w-3" />
                             <span>{post.readTime}</span>
                           </div>
                         </div>
@@ -552,8 +611,8 @@ const BlogPost = () => {
               {/* Newsletter */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg flex items-center">
-                    <Send className="w-5 h-5 mr-2" />
+                  <CardTitle className="flex items-center text-lg">
+                    <Send className="mr-2 h-5 w-5" />
                     Newsletter
                   </CardTitle>
                   <CardDescription>
@@ -564,7 +623,7 @@ const BlogPost = () => {
                   <input
                     type="email"
                     placeholder="Seu melhor email"
-                    className="w-full px-3 py-2 text-sm border rounded-md bg-background"
+                    className="w-full rounded-md border bg-background px-3 py-2 text-sm"
                   />
                   <Button size="sm" className="w-full">
                     Inscrever-se

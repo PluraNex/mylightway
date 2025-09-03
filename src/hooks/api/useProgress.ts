@@ -1,10 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api/client';
 import { queryKeys, apiEndpoints } from '@/lib/api/config';
-import type { 
-  UserProgress,
-  ApiSuccessResponse 
-} from '@/types/api';
+import type { UserProgress, ApiSuccessResponse } from '@/types/api';
 
 export const useUserProgress = (userId?: string) => {
   return useQuery({
@@ -66,9 +63,11 @@ interface UpdateProgressPayload {
 
 export const useUpdateProgress = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: async (payload: UpdateProgressPayload): Promise<UserProgress> => {
+    mutationFn: async (
+      payload: UpdateProgressPayload
+    ): Promise<UserProgress> => {
       const response = await apiClient.post<ApiSuccessResponse<UserProgress>>(
         apiEndpoints.progress.updateProgress,
         payload
@@ -83,19 +82,19 @@ export const useUpdateProgress = () => {
           data
         );
       }
-      
+
       // Invalidate broader progress queries
       queryClient.invalidateQueries({ queryKey: queryKeys.progress.all() });
-      
+
       if (variables.pathId) {
-        queryClient.invalidateQueries({ 
-          queryKey: queryKeys.progress.byPath(variables.pathId) 
+        queryClient.invalidateQueries({
+          queryKey: queryKeys.progress.byPath(variables.pathId),
         });
       }
-      
+
       // Update user stats
-      queryClient.invalidateQueries({ 
-        queryKey: queryKeys.users.stats(data.userId) 
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.users.stats(data.userId),
       });
     },
   });
@@ -107,22 +106,24 @@ interface BulkUpdateProgressPayload {
 
 export const useBulkUpdateProgress = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: async (payload: BulkUpdateProgressPayload): Promise<UserProgress[]> => {
+    mutationFn: async (
+      payload: BulkUpdateProgressPayload
+    ): Promise<UserProgress[]> => {
       const response = await apiClient.post<ApiSuccessResponse<UserProgress[]>>(
         `${apiEndpoints.progress.updateProgress}/bulk`,
         payload
       );
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       // Invalidate all progress-related queries for bulk updates
       queryClient.invalidateQueries({ queryKey: queryKeys.progress.all() });
-      
+
       data.forEach(progress => {
-        queryClient.invalidateQueries({ 
-          queryKey: queryKeys.users.stats(progress.userId) 
+        queryClient.invalidateQueries({
+          queryKey: queryKeys.users.stats(progress.userId),
         });
       });
     },

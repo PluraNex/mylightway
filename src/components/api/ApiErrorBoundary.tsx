@@ -15,7 +15,10 @@ interface ApiErrorFallbackProps {
   resetError: () => void;
 }
 
-const DefaultApiErrorFallback: React.FC<ApiErrorFallbackProps> = ({ error, resetError }) => {
+const DefaultApiErrorFallback: React.FC<ApiErrorFallbackProps> = ({
+  error,
+  resetError,
+}) => {
   const getErrorMessage = (error: ApiError) => {
     if (error.status === 401) {
       return 'Você precisa fazer login para acessar este conteúdo.';
@@ -45,7 +48,7 @@ const DefaultApiErrorFallback: React.FC<ApiErrorFallbackProps> = ({ error, reset
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[200px] p-4">
+    <div className="flex min-h-[200px] items-center justify-center p-4">
       <Alert className="max-w-md">
         <AlertCircle className="h-4 w-4" />
         <AlertTitle>{getErrorTitle(error)}</AlertTitle>
@@ -53,9 +56,9 @@ const DefaultApiErrorFallback: React.FC<ApiErrorFallbackProps> = ({ error, reset
           {getErrorMessage(error)}
         </AlertDescription>
         <div className="mt-4 flex gap-2">
-          <Button 
-            onClick={resetError} 
-            size="sm" 
+          <Button
+            onClick={resetError}
+            size="sm"
             variant="outline"
             className="gap-2"
           >
@@ -68,9 +71,9 @@ const DefaultApiErrorFallback: React.FC<ApiErrorFallbackProps> = ({ error, reset
   );
 };
 
-export const ApiErrorBoundary: React.FC<ApiErrorBoundaryProps> = ({ 
-  children, 
-  fallback = DefaultApiErrorFallback 
+export const ApiErrorBoundary: React.FC<ApiErrorBoundaryProps> = ({
+  children,
+  fallback = DefaultApiErrorFallback,
 }) => {
   return (
     <QueryErrorResetBoundary>
@@ -93,7 +96,13 @@ class ErrorBoundary extends React.Component<
   {
     children: React.ReactNode;
     onReset?: () => void;
-    fallbackRender: ({ error, resetErrorBoundary }: { error: any; resetErrorBoundary: () => void }) => React.ReactNode;
+    fallbackRender: ({
+      error,
+      resetErrorBoundary,
+    }: {
+      error: any;
+      resetErrorBoundary: () => void;
+    }) => React.ReactNode;
   },
   { hasError: boolean; error: any }
 > {

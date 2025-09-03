@@ -34,7 +34,7 @@ class ApiClient {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseURL}${endpoint}`;
-    
+
     const config: RequestInit = {
       headers: {
         ...this.defaultHeaders,
@@ -45,7 +45,7 @@ class ApiClient {
 
     try {
       const response = await fetch(url, config);
-      
+
       if (!response.ok) {
         const error: ApiError = {
           message: response.statusText || 'Request failed',
@@ -79,7 +79,7 @@ class ApiClient {
 
   async get<T>(endpoint: string, params?: Record<string, any>): Promise<T> {
     let url = endpoint;
-    
+
     if (params) {
       const searchParams = new URLSearchParams();
       Object.entries(params).forEach(([key, value]) => {
@@ -87,7 +87,7 @@ class ApiClient {
           searchParams.append(key, String(value));
         }
       });
-      
+
       const queryString = searchParams.toString();
       if (queryString) {
         url += `?${queryString}`;

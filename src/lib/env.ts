@@ -36,7 +36,10 @@ export const env: Environment = {
   ENABLE_DEVTOOLS: getBooleanEnvVar('VITE_ENABLE_DEVTOOLS', true),
   ENABLE_API_MOCKING: getBooleanEnvVar('VITE_ENABLE_API_MOCKING', false),
   TOKEN_STORAGE_KEY: getEnvVar('VITE_TOKEN_STORAGE_KEY', 'auth_token'),
-  REFRESH_TOKEN_STORAGE_KEY: getEnvVar('VITE_REFRESH_TOKEN_STORAGE_KEY', 'refresh_token'),
+  REFRESH_TOKEN_STORAGE_KEY: getEnvVar(
+    'VITE_REFRESH_TOKEN_STORAGE_KEY',
+    'refresh_token'
+  ),
 };
 
 export const isDevelopment = env.APP_ENV === 'development';

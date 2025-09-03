@@ -18,9 +18,7 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <BrowserRouter>
-          {children}
-        </BrowserRouter>
+        <BrowserRouter>{children}</BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );
@@ -116,14 +114,14 @@ export const mockHandlers = {
     refreshToken: 'mock-refresh-token',
     expiresIn: 3600,
   }),
-  
+
   getLearningPaths: () => [createMockLearningPath()],
-  
+
   getLesson: (id: string) => ({
     ...createMockLesson(),
     id,
   }),
-  
+
   getUserProgress: () => ({
     userId: '1',
     pathId: '1',
@@ -137,7 +135,7 @@ export const mockHandlers = {
 
 // Helper to wait for loading states
 export const waitForLoadingToFinish = () =>
-  new Promise((resolve) => setTimeout(resolve, 0));
+  new Promise(resolve => setTimeout(resolve, 0));
 
 // Helper to create mock store state
 export const createMockStoreState = () => ({

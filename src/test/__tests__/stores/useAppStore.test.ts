@@ -36,7 +36,7 @@ describe('useAppStore', () => {
   describe('User Actions', () => {
     it('should set user and update authentication status', () => {
       const { result } = renderHook(() => useAppStore());
-      
+
       const mockUser: User = {
         id: '1',
         name: 'Test User',
@@ -54,7 +54,7 @@ describe('useAppStore', () => {
 
     it('should clear user on logout', () => {
       const { result } = renderHook(() => useAppStore());
-      
+
       // First set a user
       act(() => {
         result.current.setUser({
@@ -96,7 +96,7 @@ describe('useAppStore', () => {
   describe('Progress Actions', () => {
     it('should update lesson progress', () => {
       const { result } = renderHook(() => useAppStore());
-      
+
       // Set initial learning paths
       act(() => {
         result.current.setLearningPaths([
@@ -200,13 +200,16 @@ describe('useAppStore', () => {
     it('should toggle notifications preference', () => {
       const { result } = renderHook(() => useAppStore());
 
-      const initialNotifications = result.current.preferences.notificationsEnabled;
+      const initialNotifications =
+        result.current.preferences.notificationsEnabled;
 
       act(() => {
         result.current.toggleNotifications();
       });
 
-      expect(result.current.preferences.notificationsEnabled).toBe(!initialNotifications);
+      expect(result.current.preferences.notificationsEnabled).toBe(
+        !initialNotifications
+      );
     });
 
     it('should update language preference', () => {
@@ -252,9 +255,15 @@ describe('useAppStore', () => {
 
   describe('Selectors', () => {
     it('should provide selector hooks', () => {
-      const { result: userResult } = renderHook(() => useAppStore(state => state.user));
-      const { result: authResult } = renderHook(() => useAppStore(state => state.isAuthenticated));
-      const { result: prefsResult } = renderHook(() => useAppStore(state => state.preferences));
+      const { result: userResult } = renderHook(() =>
+        useAppStore(state => state.user)
+      );
+      const { result: authResult } = renderHook(() =>
+        useAppStore(state => state.isAuthenticated)
+      );
+      const { result: prefsResult } = renderHook(() =>
+        useAppStore(state => state.preferences)
+      );
 
       expect(userResult.current).toBe(null);
       expect(authResult.current).toBe(false);

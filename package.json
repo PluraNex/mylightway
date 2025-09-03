@@ -19,7 +19,14 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "pre-push": "npm run ci-check",
+    "ci-check": "npm run lint && npm run type-check && npm run test:run && npm run build",
+    "workflow-test": "npm run format:check && npm run lint && npm run type-check && npm run test:run",
+    "quick-check": "npm run lint && npm run type-check",
+    "pre-commit": "npm run format && npm run lint:fix && npm run type-check",
+    "ready-to-push": "npm run format && npm run lint && npm run type-check && npm run build",
+    "full-check": "npm run format:check && npm run lint && npm run type-check && npm run test:run && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

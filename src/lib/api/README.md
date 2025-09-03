@@ -63,11 +63,7 @@ import { AuthService } from '@/services';
 AuthService.initializeAuth();
 
 function App() {
-  return (
-    <QueryProvider>
-      {/* Seu app aqui */}
-    </QueryProvider>
-  );
+  return <QueryProvider>{/* Seu app aqui */}</QueryProvider>;
 }
 ```
 
@@ -83,16 +79,16 @@ function Dashboard() {
   const { data: paths } = useLearningPaths();
   const loginMutation = useLogin();
 
-  const handleLogin = (credentials) => {
+  const handleLogin = credentials => {
     loginMutation.mutate(credentials, {
       onSuccess: () => {
         console.log('Login realizado com sucesso!');
-      }
+      },
     });
   };
 
   if (isLoading) return <LoadingSpinner />;
-  
+
   return (
     <div>
       <h1>Olá, {profile?.name}</h1>
@@ -113,7 +109,7 @@ const response = await AuthService.login({ email, password });
 // Buscar trilhas de aprendizado
 const paths = await LearningService.getLearningPaths({
   category: 'bible-study',
-  limit: 10
+  limit: 10,
 });
 ```
 
@@ -176,9 +172,9 @@ updateProgress.mutate(
     onSuccess: () => {
       toast.success('Progresso salvo!');
     },
-    onError: (error) => {
+    onError: error => {
       toast.error(`Erro: ${error.message}`);
-    }
+    },
   }
 );
 ```
@@ -191,9 +187,9 @@ Todas as query keys são tipadas e organizadas:
 import { queryKeys } from '@/lib/api/config';
 
 // Exemplos de uso
-queryKeys.auth.profile()                    // ['auth', 'profile']
-queryKeys.learningPaths.detail('123')      // ['learning-paths', 'detail', '123']
-queryKeys.lessons.progress('456', 'user1') // ['lessons', '456', 'progress', 'user1']
+queryKeys.auth.profile(); // ['auth', 'profile']
+queryKeys.learningPaths.detail('123'); // ['learning-paths', 'detail', '123']
+queryKeys.lessons.progress('456', 'user1'); // ['lessons', '456', 'progress', 'user1']
 ```
 
 ## 🛡️ Tratamento de Erros
@@ -209,7 +205,7 @@ queryKeys.lessons.progress('456', 'user1') // ['lessons', '456', 'progress', 'us
 ### Error Boundaries
 
 ```tsx
-<ApiErrorBoundary 
+<ApiErrorBoundary
   fallback={(error, resetError) => (
     <CustomErrorComponent error={error} onRetry={resetError} />
   )}
@@ -223,15 +219,11 @@ queryKeys.lessons.progress('456', 'user1') // ['lessons', '456', 'progress', 'us
 Para listas paginadas:
 
 ```tsx
-const {
-  data,
-  fetchNextPage,
-  hasNextPage,
-  isFetchingNextPage
-} = useInfiniteLearningPaths({ category: 'bible-study' });
+const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  useInfiniteLearningPaths({ category: 'bible-study' });
 
 // Renderizar páginas
-data?.pages.map(page => 
+data?.pages.map(page =>
   page.data.map(item => <Item key={item.id} {...item} />)
 );
 ```
@@ -250,16 +242,16 @@ data?.pages.map(page =>
 ```tsx
 const updateMutation = useMutation({
   mutationFn: updateData,
-  onMutate: async (newData) => {
+  onMutate: async newData => {
     // Cancelar queries existentes
     await queryClient.cancelQueries({ queryKey });
-    
+
     // Snapshot do valor anterior
     const previousData = queryClient.getQueryData(queryKey);
-    
+
     // Atualização otimista
     queryClient.setQueryData(queryKey, newData);
-    
+
     return { previousData };
   },
   onError: (error, variables, context) => {
@@ -271,7 +263,7 @@ const updateMutation = useMutation({
   onSettled: () => {
     // Revalidar após mutation
     queryClient.invalidateQueries({ queryKey });
-  }
+  },
 });
 ```
 
@@ -287,8 +279,8 @@ import { renderWithProviders } from '@/test/utils';
 const testQueryClient = new QueryClient({
   defaultOptions: {
     queries: { retry: false },
-    mutations: { retry: false }
-  }
+    mutations: { retry: false },
+  },
 });
 ```
 
@@ -317,7 +309,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 ```tsx
 import { ApiStatus } from '@/components/api';
 
-<ApiStatus /> // Mostra status da API (online/offline)
+<ApiStatus />; // Mostra status da API (online/offline)
 ```
 
 ## 🚀 Próximos Passos

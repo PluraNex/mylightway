@@ -1,26 +1,36 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import type { AppState, User, LearningPath, Achievement, AppPreferences } from './types';
+import type {
+  AppState,
+  User,
+  LearningPath,
+  Achievement,
+  AppPreferences,
+} from './types';
 
 interface AppActions {
   // User actions
   setUser: (user: User | null) => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  
+
   // Learning actions
   setLearningPaths: (paths: LearningPath[]) => void;
-  updateProgress: (lessonId: string, completed: boolean, score?: number) => void;
+  updateProgress: (
+    lessonId: string,
+    completed: boolean,
+    score?: number
+  ) => void;
   addAchievement: (achievement: Achievement) => void;
   updateStreak: () => void;
-  
+
   // Preferences actions
   setTheme: (theme: AppPreferences['theme']) => void;
   setFontSize: (fontSize: AppPreferences['fontSize']) => void;
   toggleSound: () => void;
   toggleNotifications: () => void;
   setLanguage: (language: AppPreferences['language']) => void;
-  
+
   // UI actions
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
@@ -54,14 +64,14 @@ export const useAppStore = create<AppState & AppActions>()(
         ...initialState,
 
         // User actions
-        setUser: (user) => set({ user, isAuthenticated: !!user }),
-        
+        setUser: user => set({ user, isAuthenticated: !!user }),
+
         login: async (email, password) => {
           set({ isLoading: true, error: null });
           try {
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 1000));
-            
+
             // Mock user data
             const user: User = {
               id: '1',
@@ -70,34 +80,33 @@ export const useAppStore = create<AppState & AppActions>()(
               age: 8,
               avatar: '/avatars/default.png',
             };
-            
+
             set({ user, isAuthenticated: true, isLoading: false });
           } catch (error) {
             set({ error: 'Erro ao fazer login', isLoading: false });
           }
         },
-        
+
         logout: () => set({ user: null, isAuthenticated: false }),
 
         // Learning actions
-        setLearningPaths: (paths) => set({ learningPaths: paths }),
-        
+        setLearningPaths: paths => set({ learningPaths: paths }),
+
         updateProgress: (lessonId, completed, score) => {
           const state = get();
           const updatedPaths = state.learningPaths.map(path => ({
             ...path,
-            lessons: path.lessons.map(lesson => 
-              lesson.id === lessonId 
-                ? { ...lesson, completed, score }
-                : lesson
+            lessons: path.lessons.map(lesson =>
+              lesson.id === lessonId ? { ...lesson, completed, score } : lesson
             ),
           }));
-          
+
           const totalCompleted = updatedPaths.reduce(
-            (total, path) => total + path.lessons.filter(l => l.completed).length,
+            (total, path) =>
+              total + path.lessons.filter(l => l.completed).length,
             0
           );
-          
+
           set({
             learningPaths: updatedPaths,
             userProgress: {
@@ -107,11 +116,13 @@ export const useAppStore = create<AppState & AppActions>()(
             },
           });
         },
-        
-        addAchievement: (achievement) => {
+
+        addAchievement: achievement => {
           const state = get();
-          const exists = state.userProgress.achievements.some(a => a.id === achievement.id);
-          
+          const exists = state.userProgress.achievements.some(
+            a => a.id === achievement.id
+          );
+
           if (!exists) {
             set({
               userProgress: {
@@ -121,12 +132,12 @@ export const useAppStore = create<AppState & AppActions>()(
             });
           }
         },
-        
+
         updateStreak: () => {
           const state = get();
           const today = new Date();
           const lastStudy = state.userProgress.lastStudyDate;
-          
+
           if (!lastStudy) {
             set({
               userProgress: {
@@ -137,9 +148,11 @@ export const useAppStore = create<AppState & AppActions>()(
             });
             return;
           }
-          
-          const daysDiff = Math.floor((today.getTime() - lastStudy.getTime()) / (1000 * 60 * 60 * 24));
-          
+
+          const daysDiff = Math.floor(
+            (today.getTime() - lastStudy.getTime()) / (1000 * 60 * 60 * 24)
+          );
+
           if (daysDiff === 1) {
             // Consecutive day
             set({
@@ -162,45 +175,45 @@ export const useAppStore = create<AppState & AppActions>()(
         },
 
         // Preferences actions
-        setTheme: (theme) => 
+        setTheme: theme =>
           set(state => ({
-            preferences: { ...state.preferences, theme }
+            preferences: { ...state.preferences, theme },
           })),
-        
-        setFontSize: (fontSize) =>
+
+        setFontSize: fontSize =>
           set(state => ({
-            preferences: { ...state.preferences, fontSize }
+            preferences: { ...state.preferences, fontSize },
           })),
-        
+
         toggleSound: () =>
           set(state => ({
-            preferences: { 
-              ...state.preferences, 
-              soundEnabled: !state.preferences.soundEnabled 
-            }
+            preferences: {
+              ...state.preferences,
+              soundEnabled: !state.preferences.soundEnabled,
+            },
           })),
-        
+
         toggleNotifications: () =>
           set(state => ({
-            preferences: { 
-              ...state.preferences, 
-              notificationsEnabled: !state.preferences.notificationsEnabled 
-            }
+            preferences: {
+              ...state.preferences,
+              notificationsEnabled: !state.preferences.notificationsEnabled,
+            },
           })),
-        
-        setLanguage: (language) =>
+
+        setLanguage: language =>
           set(state => ({
-            preferences: { ...state.preferences, language }
+            preferences: { ...state.preferences, language },
           })),
 
         // UI actions
-        setLoading: (isLoading) => set({ isLoading }),
-        setError: (error) => set({ error }),
+        setLoading: isLoading => set({ isLoading }),
+        setError: error => set({ error }),
         clearError: () => set({ error: null }),
       }),
       {
         name: 'mylightway-storage',
-        partialize: (state) => ({
+        partialize: state => ({
           user: state.user,
           isAuthenticated: state.isAuthenticated,
           userProgress: state.userProgress,
@@ -216,7 +229,8 @@ export const useAppStore = create<AppState & AppActions>()(
 
 // Selectors for better performance
 export const useUser = () => useAppStore(state => state.user);
-export const useIsAuthenticated = () => useAppStore(state => state.isAuthenticated);
+export const useIsAuthenticated = () =>
+  useAppStore(state => state.isAuthenticated);
 export const useLearningPaths = () => useAppStore(state => state.learningPaths);
 export const useUserProgress = () => useAppStore(state => state.userProgress);
 export const usePreferences = () => useAppStore(state => state.preferences);

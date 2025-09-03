@@ -59,11 +59,11 @@ export interface AppState {
   // User state
   user: User | null;
   isAuthenticated: boolean;
-  
+
   // Learning state
   learningPaths: LearningPath[];
   userProgress: UserProgress;
-  
+
   // UI state
   preferences: AppPreferences;
   isLoading: boolean;

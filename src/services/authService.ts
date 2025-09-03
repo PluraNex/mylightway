@@ -1,12 +1,12 @@
 import { apiClient } from '@/lib/api/client';
 import { apiEndpoints } from '@/lib/api/config';
 import { env } from '@/lib/env';
-import type { 
-  LoginRequest, 
-  LoginResponse, 
+import type {
+  LoginRequest,
+  LoginResponse,
   RegisterRequest,
   UserProfile,
-  ApiSuccessResponse 
+  ApiSuccessResponse,
 } from '@/types/api';
 
 export class AuthService {
@@ -15,11 +15,11 @@ export class AuthService {
       apiEndpoints.auth.login,
       credentials
     );
-    
+
     const { token, refreshToken } = response.data;
     this.setTokens(token, refreshToken);
     apiClient.setAuthToken(token);
-    
+
     return response.data;
   }
 
@@ -28,11 +28,11 @@ export class AuthService {
       apiEndpoints.auth.register,
       userData
     );
-    
+
     const { token, refreshToken } = response.data;
     this.setTokens(token, refreshToken);
     apiClient.setAuthToken(token);
-    
+
     return response.data;
   }
 
@@ -57,11 +57,11 @@ export class AuthService {
       apiEndpoints.auth.refresh,
       { refreshToken }
     );
-    
+
     const { token: newToken, refreshToken: newRefreshToken } = response.data;
     this.setTokens(newToken, newRefreshToken);
     apiClient.setAuthToken(newToken);
-    
+
     return response.data;
   }
 

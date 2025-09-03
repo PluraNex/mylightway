@@ -1,12 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api/client';
 import { queryKeys, apiEndpoints } from '@/lib/api/config';
-import type { 
-  ParentDashboard, 
-  ChildProgress, 
+import type {
+  ParentDashboard,
+  ChildProgress,
   ParentSettings,
   User,
-  ApiSuccessResponse 
+  ApiSuccessResponse,
 } from '@/types/api';
 
 export const useParentDashboard = (userId?: string) => {
@@ -36,7 +36,11 @@ export const useParentChildren = (userId?: string) => {
   });
 };
 
-export const useChildProgress = (childId: string, parentId?: string, enabled = true) => {
+export const useChildProgress = (
+  childId: string,
+  parentId?: string,
+  enabled = true
+) => {
   return useQuery({
     queryKey: queryKeys.parents.childProgress(childId, parentId),
     queryFn: async (): Promise<ChildProgress> => {
@@ -60,24 +64,27 @@ export const useParentSettings = (userId?: string) => {
       );
       return response.data;
     },
-    select: (data) => (data as ParentDashboard).settings, // Extract settings from dashboard
+    select: data => (data as ParentDashboard).settings, // Extract settings from dashboard
   });
 };
 
 export const useUpdateParentSettings = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: async (settings: Partial<ParentSettings>): Promise<ParentSettings> => {
-      const response = await apiClient.patch<ApiSuccessResponse<ParentSettings>>(
-        apiEndpoints.parents.updateSettings,
-        settings
-      );
+    mutationFn: async (
+      settings: Partial<ParentSettings>
+    ): Promise<ParentSettings> => {
+      const response = await apiClient.patch<
+        ApiSuccessResponse<ParentSettings>
+      >(apiEndpoints.parents.updateSettings, settings);
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       // Invalidate parent dashboard to refetch with new settings
-      queryClient.invalidateQueries({ queryKey: queryKeys.parents.dashboard() });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.parents.dashboard(),
+      });
     },
   });
 };

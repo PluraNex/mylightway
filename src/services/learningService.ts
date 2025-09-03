@@ -1,11 +1,11 @@
 import { apiClient } from '@/lib/api/client';
 import { apiEndpoints } from '@/lib/api/config';
-import type { 
-  LearningPath, 
-  Lesson, 
+import type {
+  LearningPath,
+  Lesson,
   UserProgress,
   PaginatedResponse,
-  ApiSuccessResponse 
+  ApiSuccessResponse,
 } from '@/types/api';
 
 export class LearningService {
@@ -17,10 +17,9 @@ export class LearningService {
     page?: number;
     limit?: number;
   }): Promise<PaginatedResponse<LearningPath>> {
-    const response = await apiClient.get<ApiSuccessResponse<PaginatedResponse<LearningPath>>>(
-      apiEndpoints.learningPaths.list,
-      params
-    );
+    const response = await apiClient.get<
+      ApiSuccessResponse<PaginatedResponse<LearningPath>>
+    >(apiEndpoints.learningPaths.list, params);
     return response.data;
   }
 
@@ -45,7 +44,10 @@ export class LearningService {
     return response.data;
   }
 
-  static async getPathProgress(pathId: string, userId?: string): Promise<UserProgress[]> {
+  static async getPathProgress(
+    pathId: string,
+    userId?: string
+  ): Promise<UserProgress[]> {
     const response = await apiClient.get<ApiSuccessResponse<UserProgress[]>>(
       apiEndpoints.learningPaths.progress(pathId),
       userId ? { userId } : undefined
@@ -67,7 +69,10 @@ export class LearningService {
     return response.data;
   }
 
-  static async startLesson(lessonId: string, pathId?: string): Promise<UserProgress> {
+  static async startLesson(
+    lessonId: string,
+    pathId?: string
+  ): Promise<UserProgress> {
     const response = await apiClient.post<ApiSuccessResponse<UserProgress>>(
       apiEndpoints.lessons.progress(lessonId),
       { action: 'start', pathId }
@@ -112,7 +117,10 @@ export class LearningService {
     return response.data;
   }
 
-  static async searchLearningPaths(query: string, limit = 10): Promise<LearningPath[]> {
+  static async searchLearningPaths(
+    query: string,
+    limit = 10
+  ): Promise<LearningPath[]> {
     const response = await this.getLearningPaths({ search: query, limit });
     return response.data;
   }

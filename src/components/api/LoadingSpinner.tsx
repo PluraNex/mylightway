@@ -14,17 +14,15 @@ const sizeMap = {
   lg: 'h-8 w-8',
 };
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ 
-  size = 'md', 
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+  size = 'md',
   className,
-  text 
+  text,
 }) => {
   return (
-    <div className={cn("flex items-center justify-center gap-2", className)}>
-      <Loader2 className={cn("animate-spin", sizeMap[size])} />
-      {text && (
-        <span className="text-sm text-muted-foreground">{text}</span>
-      )}
+    <div className={cn('flex items-center justify-center gap-2', className)}>
+      <Loader2 className={cn('animate-spin', sizeMap[size])} />
+      {text && <span className="text-sm text-muted-foreground">{text}</span>}
     </div>
   );
 };
@@ -46,13 +44,15 @@ export const LoadingState: React.FC<LoadingStateProps> = ({
   loadingText = 'Carregando...',
   errorText = 'Erro ao carregar dados',
   className,
-  minHeight = 'min-h-[200px]'
+  minHeight = 'min-h-[200px]',
 }) => {
   if (error) {
     return (
-      <div className={cn("flex items-center justify-center", minHeight, className)}>
+      <div
+        className={cn('flex items-center justify-center', minHeight, className)}
+      >
         <div className="text-center">
-          <div className="text-destructive text-sm mb-2">{errorText}</div>
+          <div className="mb-2 text-sm text-destructive">{errorText}</div>
           <div className="text-xs text-muted-foreground">{error.message}</div>
         </div>
       </div>
@@ -61,7 +61,9 @@ export const LoadingState: React.FC<LoadingStateProps> = ({
 
   if (isLoading) {
     return (
-      <div className={cn("flex items-center justify-center", minHeight, className)}>
+      <div
+        className={cn('flex items-center justify-center', minHeight, className)}
+      >
         <LoadingSpinner text={loadingText} />
       </div>
     );

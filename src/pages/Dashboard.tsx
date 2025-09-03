@@ -1,12 +1,18 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { 
-  BookOpen, 
-  Trophy, 
-  Calendar, 
-  Star, 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+import {
+  BookOpen,
+  Trophy,
+  Calendar,
+  Star,
   TrendingUp,
   Heart,
   Target,
@@ -15,9 +21,9 @@ import {
   Flame,
   Lightbulb,
   Play,
-  ArrowRight
-} from "lucide-react";
-import { Link } from "react-router-dom";
+  ArrowRight,
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const currentProgress = {
@@ -27,97 +33,105 @@ const Dashboard = () => {
     completedPaths: 3,
     totalPaths: 11,
     currentStreak: 7,
-    badges: 12
+    badges: 12,
   };
 
   const recentActivities = [
     {
       id: 1,
-      type: "trilha_completa",
-      title: "Obediência Concluída!",
-      description: "Parabéns! Você conquistou todas as badges desta trilha.",
-      time: "2 horas atrás",
-      xp: "+150 XP",
-      badge: "Coração Obediente"
+      type: 'trilha_completa',
+      title: 'Obediência Concluída!',
+      description: 'Parabéns! Você conquistou todas as badges desta trilha.',
+      time: '2 horas atrás',
+      xp: '+150 XP',
+      badge: 'Coração Obediente',
     },
     {
-      id: 2, 
-      type: "versiculo_memorizado",
-      title: "Versículo Memorizado",
+      id: 2,
+      type: 'versiculo_memorizado',
+      title: 'Versículo Memorizado',
       description: "Efésios 6:1 - 'Filhos, obedeçam a seus pais no Senhor'",
-      time: "1 dia atrás",
-      xp: "+50 XP"
+      time: '1 dia atrás',
+      xp: '+50 XP',
     },
     {
       id: 3,
-      type: "atividade_pratica",
-      title: "Atividade Realizada",
-      description: "Ajudou os pais com as tarefas domésticas",
-      time: "2 dias atrás", 
-      xp: "+75 XP"
-    }
+      type: 'atividade_pratica',
+      title: 'Atividade Realizada',
+      description: 'Ajudou os pais com as tarefas domésticas',
+      time: '2 dias atrás',
+      xp: '+75 XP',
+    },
   ];
 
   const currentLessons = [
     {
       id: 2,
-      title: "A História de Samuel",
-      pathTitle: "Trilha da Obediência",
+      title: 'A História de Samuel',
+      pathTitle: 'Trilha da Obediência',
       progress: 65,
-      timeLeft: "12 min restantes",
-      type: "story",
-      lessonId: "obediencia-samuel"
+      timeLeft: '12 min restantes',
+      type: 'story',
+      lessonId: 'obediencia-samuel',
     },
     {
       id: 3,
-      title: "A Sabedoria de Salomão",
-      pathTitle: "Trilha da Prudência", 
+      title: 'A Sabedoria de Salomão',
+      pathTitle: 'Trilha da Prudência',
       progress: 25,
-      timeLeft: "18 min restantes",
-      type: "lesson",
-      lessonId: "prudencia-salomao"
+      timeLeft: '18 min restantes',
+      type: 'lesson',
+      lessonId: 'prudencia-salomao',
     },
     {
       id: 1,
-      title: "Amor ao Próximo",
-      pathTitle: "Trilha do Amor",
+      title: 'Amor ao Próximo',
+      pathTitle: 'Trilha do Amor',
       progress: 80,
-      timeLeft: "5 min restantes", 
-      type: "activity",
-      lessonId: "amor-proximo"
-    }
+      timeLeft: '5 min restantes',
+      type: 'activity',
+      lessonId: 'amor-proximo',
+    },
   ];
 
   const nextGoals = [
     {
       id: 1,
-      title: "Complete a trilha Prudência",
+      title: 'Complete a trilha Prudência',
       progress: 75,
-      reward: "Badge Sábio Conselheiro"
+      reward: 'Badge Sábio Conselheiro',
     },
     {
       id: 2,
-      title: "Memorize 3 versículos",
+      title: 'Memorize 3 versículos',
       progress: 66,
-      reward: "100 XP Bonus"
-    }
+      reward: '100 XP Bonus',
+    },
   ];
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'story': return <BookOpen className="w-4 h-4" />;
-      case 'lesson': return <Lightbulb className="w-4 h-4" />;
-      case 'activity': return <Target className="w-4 h-4" />;
-      default: return <BookOpen className="w-4 h-4" />;
+      case 'story':
+        return <BookOpen className="h-4 w-4" />;
+      case 'lesson':
+        return <Lightbulb className="h-4 w-4" />;
+      case 'activity':
+        return <Target className="h-4 w-4" />;
+      default:
+        return <BookOpen className="h-4 w-4" />;
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'story': return 'bg-gradient-accent';
-      case 'lesson': return 'bg-gradient-success';
-      case 'activity': return 'bg-gradient-primary';
-      default: return 'bg-gradient-primary';
+      case 'story':
+        return 'bg-gradient-accent';
+      case 'lesson':
+        return 'bg-gradient-success';
+      case 'activity':
+        return 'bg-gradient-primary';
+      default:
+        return 'bg-gradient-primary';
     }
   };
 
@@ -126,8 +140,12 @@ const Dashboard = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Header do Dashboard */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">
-            Olá, <span className="bg-gradient-primary bg-clip-text text-transparent">Maria</span>! 👋
+          <h1 className="mb-2 text-3xl font-bold">
+            Olá,{' '}
+            <span className="bg-gradient-primary bg-clip-text text-transparent">
+              Maria
+            </span>
+            ! 👋
           </h1>
           <p className="text-muted-foreground">
             Continue sua jornada de crescimento na fé. Você está indo muito bem!
@@ -135,7 +153,7 @@ const Dashboard = () => {
         </div>
 
         {/* Cards de Progresso */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Card className="bg-gradient-primary text-primary-foreground">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
@@ -143,14 +161,17 @@ const Dashboard = () => {
                   <p className="text-sm opacity-90">Nível Atual</p>
                   <p className="text-3xl font-bold">{currentProgress.level}</p>
                 </div>
-                <Star className="w-8 h-8 opacity-80" />
+                <Star className="h-8 w-8 opacity-80" />
               </div>
               <div className="mt-4">
-                <Progress 
-                  value={(currentProgress.totalXP / currentProgress.nextLevelXP) * 100} 
+                <Progress
+                  value={
+                    (currentProgress.totalXP / currentProgress.nextLevelXP) *
+                    100
+                  }
                   className="bg-white/20"
                 />
-                <p className="text-xs mt-2 opacity-90">
+                <p className="mt-2 text-xs opacity-90">
                   {currentProgress.totalXP}/{currentProgress.nextLevelXP} XP
                 </p>
               </div>
@@ -162,17 +183,29 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm opacity-90">Trilhas</p>
-                  <p className="text-3xl font-bold">{currentProgress.completedPaths}/{currentProgress.totalPaths}</p>
+                  <p className="text-3xl font-bold">
+                    {currentProgress.completedPaths}/
+                    {currentProgress.totalPaths}
+                  </p>
                 </div>
-                <BookOpen className="w-8 h-8 opacity-80" />
+                <BookOpen className="h-8 w-8 opacity-80" />
               </div>
               <div className="mt-4">
-                <Progress 
-                  value={(currentProgress.completedPaths / currentProgress.totalPaths) * 100}
+                <Progress
+                  value={
+                    (currentProgress.completedPaths /
+                      currentProgress.totalPaths) *
+                    100
+                  }
                   className="bg-white/20"
                 />
-                <p className="text-xs mt-2 opacity-90">
-                  {Math.round((currentProgress.completedPaths / currentProgress.totalPaths) * 100)}% Completo
+                <p className="mt-2 text-xs opacity-90">
+                  {Math.round(
+                    (currentProgress.completedPaths /
+                      currentProgress.totalPaths) *
+                      100
+                  )}
+                  % Completo
                 </p>
               </div>
             </CardContent>
@@ -183,11 +216,13 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm opacity-90">Sequência</p>
-                  <p className="text-3xl font-bold">{currentProgress.currentStreak}</p>
+                  <p className="text-3xl font-bold">
+                    {currentProgress.currentStreak}
+                  </p>
                 </div>
-                <Flame className="w-8 h-8 opacity-80" />
+                <Flame className="h-8 w-8 opacity-80" />
               </div>
-              <p className="text-xs mt-4 opacity-90">
+              <p className="mt-4 text-xs opacity-90">
                 Dias consecutivos estudando
               </p>
             </CardContent>
@@ -198,9 +233,11 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Badges</p>
-                  <p className="text-3xl font-bold text-accent">{currentProgress.badges}</p>
+                  <p className="text-3xl font-bold text-accent">
+                    {currentProgress.badges}
+                  </p>
                 </div>
-                <Trophy className="w-8 h-8 text-muted-foreground" />
+                <Trophy className="h-8 w-8 text-muted-foreground" />
               </div>
               <Link to="/conquistas">
                 <Button variant="outline" size="sm" className="mt-4 w-full">
@@ -211,13 +248,13 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 lg:grid-cols-3">
           {/* Continue de Onde Parou */}
-          <div className="lg:col-span-3 mb-8">
+          <div className="mb-8 lg:col-span-3">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Play className="w-5 h-5" />
+                  <Play className="h-5 w-5" />
                   <span>Continue de Onde Parou</span>
                 </CardTitle>
                 <CardDescription>
@@ -225,36 +262,53 @@ const Dashboard = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-3 gap-4">
-                  {currentLessons.map((lesson) => (
+                <div className="grid gap-4 md:grid-cols-3">
+                  {currentLessons.map(lesson => (
                     <Link key={lesson.id} to={`/licao/${lesson.lessonId}`}>
-                      <Card className="hover:shadow-card transition-all hover:scale-[1.02] cursor-pointer animate-fade-in">
+                      <Card className="animate-fade-in cursor-pointer transition-all hover:scale-[1.02] hover:shadow-card">
                         <CardContent className="p-4">
-                          <div className="flex items-center space-x-3 mb-3">
-                            <div className={`w-8 h-8 rounded-lg ${getTypeColor(lesson.type)} flex items-center justify-center text-white`}>
+                          <div className="mb-3 flex items-center space-x-3">
+                            <div
+                              className={`h-8 w-8 rounded-lg ${getTypeColor(lesson.type)} flex items-center justify-center text-white`}
+                            >
                               {getTypeIcon(lesson.type)}
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <h4 className="font-semibold text-sm truncate">{lesson.title}</h4>
-                              <p className="text-xs text-muted-foreground truncate">{lesson.pathTitle}</p>
+                            <div className="min-w-0 flex-1">
+                              <h4 className="truncate text-sm font-semibold">
+                                {lesson.title}
+                              </h4>
+                              <p className="truncate text-xs text-muted-foreground">
+                                {lesson.pathTitle}
+                              </p>
                             </div>
                           </div>
-                          
+
                           <div className="mb-3">
-                            <div className="flex justify-between items-center mb-1">
-                              <span className="text-xs text-muted-foreground">Progresso</span>
-                              <span className="text-xs font-medium">{lesson.progress}%</span>
+                            <div className="mb-1 flex items-center justify-between">
+                              <span className="text-xs text-muted-foreground">
+                                Progresso
+                              </span>
+                              <span className="text-xs font-medium">
+                                {lesson.progress}%
+                              </span>
                             </div>
-                            <Progress value={lesson.progress} className="h-1.5" />
+                            <Progress
+                              value={lesson.progress}
+                              className="h-1.5"
+                            />
                           </div>
-                          
+
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-                              <Clock className="w-3 h-3" />
+                              <Clock className="h-3 w-3" />
                               <span>{lesson.timeLeft}</span>
                             </div>
-                            <Button size="sm" variant="ghost" className="h-6 px-2 text-xs hover-scale">
-                              <ArrowRight className="w-3 h-3" />
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="hover-scale h-6 px-2 text-xs"
+                            >
+                              <ArrowRight className="h-3 w-3" />
                             </Button>
                           </div>
                         </CardContent>
@@ -271,7 +325,7 @@ const Dashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5" />
+                  <Clock className="h-5 w-5" />
                   <span>Atividades Recentes</span>
                 </CardTitle>
                 <CardDescription>
@@ -279,25 +333,42 @@ const Dashboard = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {recentActivities.map((activity) => (
-                  <div key={activity.id} className="flex items-start space-x-4 p-4 rounded-lg border bg-muted/20">
-                    <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                      {activity.type === 'trilha_completa' && <Trophy className="w-5 h-5 text-white" />}
-                      {activity.type === 'versiculo_memorizado' && <BookOpen className="w-5 h-5 text-white" />}
-                      {activity.type === 'atividade_pratica' && <Target className="w-5 h-5 text-white" />}
+                {recentActivities.map(activity => (
+                  <div
+                    key={activity.id}
+                    className="flex items-start space-x-4 rounded-lg border bg-muted/20 p-4"
+                  >
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-primary">
+                      {activity.type === 'trilha_completa' && (
+                        <Trophy className="h-5 w-5 text-white" />
+                      )}
+                      {activity.type === 'versiculo_memorizado' && (
+                        <BookOpen className="h-5 w-5 text-white" />
+                      )}
+                      {activity.type === 'atividade_pratica' && (
+                        <Target className="h-5 w-5 text-white" />
+                      )}
                     </div>
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0 flex-1">
                       <div className="flex items-center justify-between">
-                        <h4 className="font-semibold text-sm">{activity.title}</h4>
+                        <h4 className="text-sm font-semibold">
+                          {activity.title}
+                        </h4>
                         <div className="flex items-center space-x-2">
-                          <Badge variant="secondary" className="text-xs">{activity.xp}</Badge>
-                          <span className="text-xs text-muted-foreground">{activity.time}</span>
+                          <Badge variant="secondary" className="text-xs">
+                            {activity.xp}
+                          </Badge>
+                          <span className="text-xs text-muted-foreground">
+                            {activity.time}
+                          </span>
                         </div>
                       </div>
-                      <p className="text-sm text-muted-foreground mt-1">{activity.description}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {activity.description}
+                      </p>
                       {activity.badge && (
                         <Badge className="mt-2 bg-gradient-accent text-xs">
-                          <Award className="w-3 h-3 mr-1" />
+                          <Award className="mr-1 h-3 w-3" />
                           {activity.badge}
                         </Badge>
                       )}
@@ -313,31 +384,35 @@ const Dashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Target className="w-5 h-5" />
+                  <Target className="h-5 w-5" />
                   <span>Próximos Objetivos</span>
                 </CardTitle>
-                <CardDescription>
-                  Continue progredindo
-                </CardDescription>
+                <CardDescription>Continue progredindo</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {nextGoals.map((goal) => (
+                {nextGoals.map(goal => (
                   <div key={goal.id} className="space-y-3">
-                    <div className="flex justify-between items-start">
-                      <h4 className="font-semibold text-sm leading-tight">{goal.title}</h4>
-                      <span className="text-xs text-muted-foreground">{goal.progress}%</span>
+                    <div className="flex items-start justify-between">
+                      <h4 className="text-sm font-semibold leading-tight">
+                        {goal.title}
+                      </h4>
+                      <span className="text-xs text-muted-foreground">
+                        {goal.progress}%
+                      </span>
                     </div>
                     <Progress value={goal.progress} className="h-2" />
                     <div className="flex items-center space-x-2">
-                      <Trophy className="w-3 h-3 text-accent" />
-                      <span className="text-xs text-muted-foreground">{goal.reward}</span>
+                      <Trophy className="h-3 w-3 text-accent" />
+                      <span className="text-xs text-muted-foreground">
+                        {goal.reward}
+                      </span>
                     </div>
                   </div>
                 ))}
-                
+
                 <Link to="/trilhas">
-                  <Button className="w-full mt-4 bg-gradient-primary">
-                    <BookOpen className="w-4 h-4 mr-2" />
+                  <Button className="mt-4 w-full bg-gradient-primary">
+                    <BookOpen className="mr-2 h-4 w-4" />
                     Continuar Estudos
                   </Button>
                 </Link>
@@ -348,18 +423,18 @@ const Dashboard = () => {
             <Card className="mt-6">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Heart className="w-5 h-5" />
+                  <Heart className="h-5 w-5" />
                   <span>Devocional do Dia</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-center space-y-4">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-accent flex items-center justify-center">
-                    <BookOpen className="w-8 h-8 text-accent-foreground" />
+                <div className="space-y-4 text-center">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-accent">
+                    <BookOpen className="h-8 w-8 text-accent-foreground" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-sm">O Amor de Deus</h4>
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <h4 className="text-sm font-semibold">O Amor de Deus</h4>
+                    <p className="mt-1 text-xs text-muted-foreground">
                       "Porque Deus amou o mundo de tal maneira..." - João 3:16
                     </p>
                   </div>

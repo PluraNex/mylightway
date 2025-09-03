@@ -15,7 +15,8 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export const usePWA = () => {
-  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [installPrompt, setInstallPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
   const [pwaState, setPwaState] = useState<PWAState>({
     isInstallable: false,
     isInstalled: false,
@@ -36,7 +37,11 @@ export const usePWA = () => {
       console.log('SW registration error', error);
     },
     onNeedRefresh() {
-      setPwaState(prev => ({ ...prev, needRefresh: true, updateAvailable: true }));
+      setPwaState(prev => ({
+        ...prev,
+        needRefresh: true,
+        updateAvailable: true,
+      }));
     },
     onOfflineReady() {
       console.log('App ready to work offline');
@@ -53,10 +58,10 @@ export const usePWA = () => {
 
     const handleAppInstalled = () => {
       setInstallPrompt(null);
-      setPwaState(prev => ({ 
-        ...prev, 
-        isInstalled: true, 
-        isInstallable: false 
+      setPwaState(prev => ({
+        ...prev,
+        isInstalled: true,
+        isInstallable: false,
       }));
     };
 
@@ -64,7 +69,10 @@ export const usePWA = () => {
     window.addEventListener('appinstalled', handleAppInstalled);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handleBeforeInstallPrompt
+      );
       window.removeEventListener('appinstalled', handleAppInstalled);
     };
   }, []);
@@ -92,10 +100,12 @@ export const usePWA = () => {
   useEffect(() => {
     const checkInstallation = () => {
       // Check if running in standalone mode (installed PWA)
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+      const isStandalone = window.matchMedia(
+        '(display-mode: standalone)'
+      ).matches;
       // Check if running as PWA on iOS
       const isIOSPWA = (window.navigator as any).standalone === true;
-      
+
       if (isStandalone || isIOSPWA) {
         setPwaState(prev => ({ ...prev, isInstalled: true }));
       }
@@ -111,13 +121,13 @@ export const usePWA = () => {
     try {
       await installPrompt.prompt();
       const { outcome } = await installPrompt.userChoice;
-      
+
       if (outcome === 'accepted') {
         setInstallPrompt(null);
-        setPwaState(prev => ({ 
-          ...prev, 
+        setPwaState(prev => ({
+          ...prev,
           isInstallable: false,
-          isInstalled: true 
+          isInstalled: true,
         }));
         return true;
       }
@@ -132,10 +142,10 @@ export const usePWA = () => {
   const updateApp = useCallback(async () => {
     try {
       await updateServiceWorker(true);
-      setPwaState(prev => ({ 
-        ...prev, 
-        needRefresh: false, 
-        updateAvailable: false 
+      setPwaState(prev => ({
+        ...prev,
+        needRefresh: false,
+        updateAvailable: false,
       }));
       return true;
     } catch (error) {
@@ -146,10 +156,10 @@ export const usePWA = () => {
 
   // Dismiss update
   const dismissUpdate = useCallback(() => {
-    setPwaState(prev => ({ 
-      ...prev, 
-      needRefresh: false, 
-      updateAvailable: false 
+    setPwaState(prev => ({
+      ...prev,
+      needRefresh: false,
+      updateAvailable: false,
     }));
   }, []);
 

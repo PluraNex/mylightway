@@ -9,7 +9,11 @@ interface ApiStatusProps {
 }
 
 export const ApiStatus: React.FC<ApiStatusProps> = ({ className }) => {
-  const { data: status, isLoading, error } = useQuery({
+  const {
+    data: status,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['api-status'],
     queryFn: async () => {
       try {
@@ -26,7 +30,7 @@ export const ApiStatus: React.FC<ApiStatusProps> = ({ className }) => {
   if (isLoading) {
     return (
       <Badge variant="secondary" className={className}>
-        <Clock className="h-3 w-3 mr-1" />
+        <Clock className="mr-1 h-3 w-3" />
         Verificando...
       </Badge>
     );
@@ -35,7 +39,7 @@ export const ApiStatus: React.FC<ApiStatusProps> = ({ className }) => {
   if (error || status === 'offline') {
     return (
       <Badge variant="destructive" className={className}>
-        <XCircle className="h-3 w-3 mr-1" />
+        <XCircle className="mr-1 h-3 w-3" />
         API Offline
       </Badge>
     );
@@ -43,7 +47,7 @@ export const ApiStatus: React.FC<ApiStatusProps> = ({ className }) => {
 
   return (
     <Badge variant="default" className={className}>
-      <CheckCircle className="h-3 w-3 mr-1" />
+      <CheckCircle className="mr-1 h-3 w-3" />
       API Online
     </Badge>
   );

@@ -1,15 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-  BookOpen, 
-  Home, 
-  Trophy, 
-  Heart, 
-  Menu,
-  Bell,
-  Star
-} from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { BookOpen, Home, Trophy, Heart, Menu, Bell, Star } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Sheet,
   SheetContent,
@@ -17,22 +9,22 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from '@/components/ui/sheet';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Header = () => {
   const location = useLocation();
-  
+
   const navigation = [
-    { name: "Início", href: "/", icon: Home },
-    { name: "Trilhas", href: "/trilhas", icon: BookOpen },
-    { name: "Conquistas", href: "/conquistas", icon: Trophy },
-    { name: "Pais", href: "/pais", icon: Heart },
+    { name: 'Início', href: '/', icon: Home },
+    { name: 'Trilhas', href: '/trilhas', icon: BookOpen },
+    { name: 'Conquistas', href: '/conquistas', icon: Trophy },
+    { name: 'Pais', href: '/pais', icon: Heart },
   ];
 
   const isActive = (path: string) => {
-    if (path === "/" && location.pathname === "/") return true;
-    if (path !== "/" && location.pathname.startsWith(path)) return true;
+    if (path === '/' && location.pathname === '/') return true;
+    if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
 
@@ -42,29 +34,29 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <BookOpen className="w-5 h-5 text-white" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary">
+              <BookOpen className="h-5 w-5 text-white" />
             </div>
-            <span className="font-bold text-lg bg-gradient-primary bg-clip-text text-transparent">
+            <span className="bg-gradient-primary bg-clip-text text-lg font-bold text-transparent">
               Crescer na Fé
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            {navigation.map((item) => {
+          <nav className="hidden items-center space-x-6 md:flex">
+            {navigation.map(item => {
               const Icon = item.icon;
               return (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex items-center space-x-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     isActive(item.href)
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="h-4 w-4" />
                   <span>{item.name}</span>
                 </Link>
               );
@@ -75,24 +67,26 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             {/* Notifications */}
             <Button variant="ghost" size="icon" className="relative">
-              <Bell className="w-5 h-5" />
-              <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs bg-gradient-accent">
+              <Bell className="h-5 w-5" />
+              <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full bg-gradient-accent p-0 text-xs">
                 2
               </Badge>
             </Button>
 
             {/* User Profile */}
-            <div className="hidden md:flex items-center space-x-3">
+            <div className="hidden items-center space-x-3 md:flex">
               <div className="text-right">
                 <p className="text-sm font-medium">Maria</p>
                 <div className="flex items-center space-x-1">
-                  <Star className="w-3 h-3 text-accent fill-accent" />
+                  <Star className="h-3 w-3 fill-accent text-accent" />
                   <span className="text-xs text-muted-foreground">Nível 3</span>
                 </div>
               </div>
               <Avatar className="h-8 w-8">
                 <AvatarImage src="/placeholder.svg" />
-                <AvatarFallback className="bg-gradient-primary text-white">M</AvatarFallback>
+                <AvatarFallback className="bg-gradient-primary text-white">
+                  M
+                </AvatarFallback>
               </Avatar>
             </div>
 
@@ -100,14 +94,14 @@ const Header = () => {
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
-                  <Menu className="w-5 h-5" />
+                  <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent>
                 <SheetHeader>
                   <SheetTitle className="flex items-center space-x-2">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-                      <BookOpen className="w-5 h-5 text-white" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary">
+                      <BookOpen className="h-5 w-5 text-white" />
                     </div>
                     <span>Crescer na Fé</span>
                   </SheetTitle>
@@ -115,38 +109,42 @@ const Header = () => {
                     Educação cristã para toda a família
                   </SheetDescription>
                 </SheetHeader>
-                
+
                 <div className="mt-6 space-y-2">
-                  {navigation.map((item) => {
+                  {navigation.map(item => {
                     const Icon = item.icon;
                     return (
                       <Link
                         key={item.name}
                         to={item.href}
-                        className={`flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full ${
+                        className={`flex w-full items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                           isActive(item.href)
-                            ? "bg-primary text-primary-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                            ? 'bg-primary text-primary-foreground'
+                            : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                         }`}
                       >
-                        <Icon className="w-4 h-4" />
+                        <Icon className="h-4 w-4" />
                         <span>{item.name}</span>
                       </Link>
                     );
                   })}
                 </div>
 
-                <div className="mt-6 pt-6 border-t">
+                <div className="mt-6 border-t pt-6">
                   <div className="flex items-center space-x-3 px-3 py-2">
                     <Avatar className="h-10 w-10">
                       <AvatarImage src="/placeholder.svg" />
-                      <AvatarFallback className="bg-gradient-primary text-white">M</AvatarFallback>
+                      <AvatarFallback className="bg-gradient-primary text-white">
+                        M
+                      </AvatarFallback>
                     </Avatar>
                     <div>
                       <p className="font-medium">Maria</p>
                       <div className="flex items-center space-x-1">
-                        <Star className="w-3 h-3 text-accent fill-accent" />
-                        <span className="text-xs text-muted-foreground">Nível 3</span>
+                        <Star className="h-3 w-3 fill-accent text-accent" />
+                        <span className="text-xs text-muted-foreground">
+                          Nível 3
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -160,4 +158,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header; // Git workflow test comment

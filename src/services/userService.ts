@@ -1,10 +1,10 @@
 import { apiClient } from '@/lib/api/client';
 import { apiEndpoints } from '@/lib/api/config';
-import type { 
-  UserProfile, 
-  UserStats, 
+import type {
+  UserProfile,
+  UserStats,
   UserPreferences,
-  ApiSuccessResponse 
+  ApiSuccessResponse,
 } from '@/types/api';
 
 export class UserService {
@@ -30,7 +30,7 @@ export class UserService {
   }
 
   static async updateUserProfile(
-    userId: string, 
+    userId: string,
     updates: Partial<UserProfile>
   ): Promise<UserProfile> {
     const response = await apiClient.patch<ApiSuccessResponse<UserProfile>>(
@@ -41,7 +41,7 @@ export class UserService {
   }
 
   static async updateUserPreferences(
-    userId: string, 
+    userId: string,
     preferences: Partial<UserPreferences>
   ): Promise<UserPreferences> {
     const response = await apiClient.patch<ApiSuccessResponse<UserPreferences>>(

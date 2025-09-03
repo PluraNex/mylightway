@@ -200,7 +200,12 @@ export interface UserAchievement {
 }
 
 export interface AchievementCondition {
-  type: 'lessons_completed' | 'streak_days' | 'time_spent' | 'quiz_score' | 'path_completed';
+  type:
+    | 'lessons_completed'
+    | 'streak_days'
+    | 'time_spent'
+    | 'quiz_score'
+    | 'path_completed';
   target: number;
   pathId?: string;
   category?: string;
@@ -321,10 +326,32 @@ export interface ContentFilter {
 }
 
 // Enums
-export type ProgressStatus = 'not_started' | 'in_progress' | 'completed' | 'locked';
-export type LessonType = 'reading' | 'video' | 'audio' | 'interactive' | 'quiz' | 'activity';
-export type AchievementCategory = 'completion' | 'streak' | 'mastery' | 'exploration' | 'social' | 'special';
-export type ActivityType = 'lesson_started' | 'lesson_completed' | 'quiz_attempted' | 'achievement_unlocked' | 'path_started' | 'path_completed';
+export type ProgressStatus =
+  | 'not_started'
+  | 'in_progress'
+  | 'completed'
+  | 'locked';
+export type LessonType =
+  | 'reading'
+  | 'video'
+  | 'audio'
+  | 'interactive'
+  | 'quiz'
+  | 'activity';
+export type AchievementCategory =
+  | 'completion'
+  | 'streak'
+  | 'mastery'
+  | 'exploration'
+  | 'social'
+  | 'special';
+export type ActivityType =
+  | 'lesson_started'
+  | 'lesson_completed'
+  | 'quiz_attempted'
+  | 'achievement_unlocked'
+  | 'path_started'
+  | 'path_completed';
 
 // API Endpoints Response Types
 export interface PaginatedResponse<T> {

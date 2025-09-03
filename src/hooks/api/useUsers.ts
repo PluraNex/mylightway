@@ -1,11 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api/client';
 import { queryKeys, apiEndpoints } from '@/lib/api/config';
-import type { 
-  UserProfile, 
-  UserStats, 
+import type {
+  UserProfile,
+  UserStats,
   UserPreferences,
-  ApiSuccessResponse 
+  ApiSuccessResponse,
 } from '@/types/api';
 
 export const useUserProfile = (userId: string, enabled = true) => {
@@ -50,9 +50,12 @@ export const useUserPreferences = (userId: string, enabled = true) => {
 
 export const useUpdateUserProfile = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: async (data: { userId: string; updates: Partial<UserProfile> }): Promise<UserProfile> => {
+    mutationFn: async (data: {
+      userId: string;
+      updates: Partial<UserProfile>;
+    }): Promise<UserProfile> => {
       const response = await apiClient.patch<ApiSuccessResponse<UserProfile>>(
         apiEndpoints.users.updateProfile(data.userId),
         data.updates
@@ -61,11 +64,8 @@ export const useUpdateUserProfile = () => {
     },
     onSuccess: (data, variables) => {
       // Update the profile cache
-      queryClient.setQueryData(
-        queryKeys.users.profile(variables.userId),
-        data
-      );
-      
+      queryClient.setQueryData(queryKeys.users.profile(variables.userId), data);
+
       // Update auth profile if it's the current user
       const authProfile = queryClient.getQueryData(queryKeys.auth.profile());
       if (authProfile && (authProfile as UserProfile).id === variables.userId) {
@@ -77,13 +77,15 @@ export const useUpdateUserProfile = () => {
 
 export const useUpdateUserPreferences = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: async (data: { userId: string; preferences: Partial<UserPreferences> }): Promise<UserPreferences> => {
-      const response = await apiClient.patch<ApiSuccessResponse<UserPreferences>>(
-        apiEndpoints.users.updatePreferences(data.userId),
-        data.preferences
-      );
+    mutationFn: async (data: {
+      userId: string;
+      preferences: Partial<UserPreferences>;
+    }): Promise<UserPreferences> => {
+      const response = await apiClient.patch<
+        ApiSuccessResponse<UserPreferences>
+      >(apiEndpoints.users.updatePreferences(data.userId), data.preferences);
       return response.data;
     },
     onSuccess: (data, variables) => {
@@ -92,10 +94,10 @@ export const useUpdateUserPreferences = () => {
         queryKeys.users.preferences(variables.userId),
         data
       );
-      
+
       // Update profile cache to include new preferences
-      queryClient.invalidateQueries({ 
-        queryKey: queryKeys.users.profile(variables.userId) 
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.users.profile(variables.userId),
       });
     },
   });

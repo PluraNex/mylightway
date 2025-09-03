@@ -1,10 +1,32 @@
 import React from 'react';
-import { Sun, Moon, Monitor, Palette, Type, Volume2, VolumeX, Bell, BellOff } from 'lucide-react';
+import {
+  Sun,
+  Moon,
+  Monitor,
+  Palette,
+  Type,
+  Volume2,
+  VolumeX,
+  Bell,
+  BellOff,
+} from 'lucide-react';
 import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from './ui/card';
 import { Label } from './ui/label';
 import { Switch } from './ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 import { Separator } from './ui/separator';
 import { useTheme } from '@/contexts/ThemeContext';
 import { usePreferences, useAppStore } from '@/stores/useAppStore';
@@ -60,11 +82,7 @@ export const ThemeToggle: React.FC = () => {
 export const ThemePreferencesPanel: React.FC = () => {
   const { theme, setTheme, fontSize, setFontSize, actualTheme } = useTheme();
   const preferences = usePreferences();
-  const { 
-    toggleSound, 
-    toggleNotifications, 
-    setLanguage 
-  } = useAppStore();
+  const { toggleSound, toggleNotifications, setLanguage } = useAppStore();
 
   return (
     <Card>
@@ -121,7 +139,7 @@ export const ThemePreferencesPanel: React.FC = () => {
 
         {/* Font Size */}
         <div className="space-y-3">
-          <Label className="text-sm font-medium flex items-center gap-2">
+          <Label className="flex items-center gap-2 text-sm font-medium">
             <Type className="h-4 w-4" />
             Tamanho da Fonte
           </Label>
@@ -145,7 +163,7 @@ export const ThemePreferencesPanel: React.FC = () => {
         {/* Sound Settings */}
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <Label className="text-sm font-medium flex items-center gap-2">
+            <Label className="flex items-center gap-2 text-sm font-medium">
               {preferences.soundEnabled ? (
                 <Volume2 className="h-4 w-4" />
               ) : (
@@ -168,7 +186,7 @@ export const ThemePreferencesPanel: React.FC = () => {
         {/* Notifications */}
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <Label className="text-sm font-medium flex items-center gap-2">
+            <Label className="flex items-center gap-2 text-sm font-medium">
               {preferences.notificationsEnabled ? (
                 <Bell className="h-4 w-4" />
               ) : (
